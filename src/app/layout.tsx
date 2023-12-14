@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const notoSansKR = Noto_Sans_KR({ subsets: [] });
 
 export const metadata: Metadata = {
   title: 'BABYLON: Share your insights',
@@ -17,7 +17,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={notoSansKR.className}>
+        <header className="w-full bg-white h-10 flex justify-between items-center px-4">
+          <h1>BABYLON</h1>
+          <ul className="flex gap-2">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/about">About us</a>
+            </li>
+          </ul>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
