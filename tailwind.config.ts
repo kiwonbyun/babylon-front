@@ -111,14 +111,9 @@ const config: Config = {
       slate800: '#1e293b',
       slate900: '#0f172a',
     },
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };
+
 export default config;
