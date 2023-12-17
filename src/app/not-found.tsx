@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 export default function NotFound() {
-  const [report, setReport] = useState(true);
+  const [report, setReport] = useState(false);
   const toggleReport = () => setReport((prev) => !prev);
 
   return (
@@ -33,7 +33,7 @@ export default function NotFound() {
           </Button>
         </footer>
       </section>
-      {report && <ReportForm />}
+      {report && <ReportForm closeForm={() => setReport(false)} />}
     </main>
   );
 }

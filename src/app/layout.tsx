@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import '../styles/globals.css';
+import ReactQueryProvider from '@/provider/ReactQueryProvider';
 
 const notoSansKR = Noto_Sans_KR({ subsets: [] });
 
@@ -29,7 +30,7 @@ export default function RootLayout({
             </li>
           </ul>
         </header>
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );
