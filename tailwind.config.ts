@@ -1,3 +1,4 @@
+import { ThemeColors } from '@/styles/themeColors';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -111,7 +112,20 @@ const config: Config = {
       slate800: '#1e293b',
       slate900: '#0f172a',
     },
-    extend: {},
+    screens: {
+      sm: { min: '360px', max: '767px' },
+      md: { min: '768px', max: '1023px' },
+      lg: { min: '1024px' },
+    },
+    extend: {
+      fontSize: {
+        10: '10px',
+        13: '13px',
+        14: '14px',
+        15: '15px',
+        18: '18px',
+      },
+    },
   },
   plugins: [],
 };

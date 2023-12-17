@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={notoSansKR.className}>
+      <body className={`${notoSansKR.className}`}>
         <header className="w-full bg-white h-10 flex justify-between items-center px-4">
           <h1>BABYLON</h1>
           <ul className="flex gap-2">
