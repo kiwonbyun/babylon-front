@@ -7,8 +7,6 @@ import TextArea from '../atoms/TextArea';
 import Button from '../atoms/Button';
 import SvgIcon from '../atoms/SvgIcon';
 import { useCreateErrorReport } from '@/hooks/Common/Mutate/useCreateErrorReport';
-import { useMutation } from '@tanstack/react-query';
-import { commonApi } from '@/api';
 
 interface IFormInput {
   name: string;
