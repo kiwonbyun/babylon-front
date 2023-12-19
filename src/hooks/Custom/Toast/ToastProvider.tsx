@@ -8,22 +8,28 @@ import {
 } from 'react';
 import ToastContainer from './ToastContainer';
 
-interface Toasts {
+export interface IToasts {
   id: number;
   content: string;
+  type: 'success' | 'error';
 }
 
-const ToastContext = createContext<{
-  addToast: (content: string, duration?: number) => void;
+interface ToastProviderProps {
+  addToast: {
+    success: (content: string, duration?: number) => void;
+    error: (content: string, duration?: number) => void;
+  };
   removeToast: (id: number) => void;
-}>({
-  addToast: () => {},
+}
+
+const ToastContext = createContext<ToastProviderProps>({
+  addToast: { success: () => {}, error: () => {} },
   removeToast: () => {},
 });
 let id = 1;
 
 const ToastProvider = ({ children }: { children: ReactNode }) => {
-  const [toasts, setToasts] = useState<Toasts[]>([]);
+  const [toasts, setToasts] = useState<IToasts[]>([]);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
   const removeToast = useCallback(
     (id: number) => {
@@ -32,9 +38,9 @@ const ToastProvider = ({ children }: { children: ReactNode }) => {
     [setToasts]
   );
 
-  const addToast = useCallback(
-    (content: string, durations = 2000) => {
-      setToasts([{ id: id++, content }]);
+  const addToast = {
+    success: (content: string, durations = 2000) => {
+      setToasts([{ id: id++, content, type: 'success' }]);
 
       if (timeoutId) clearTimeout(timeoutId);
       const timeout = setTimeout(() => {
@@ -42,8 +48,16 @@ const ToastProvider = ({ children }: { children: ReactNode }) => {
       }, durations);
       setTimeoutId(timeout);
     },
-    [setToasts, timeoutId]
-  );
+    error: (content: string, durations = 2000) => {
+      setToasts([{ id: id++, content, type: 'error' }]);
+
+      if (timeoutId) clearTimeout(timeoutId);
+      const timeout = setTimeout(() => {
+        setToasts([]);
+      }, durations);
+      setTimeoutId(timeout);
+    },
+  };
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>

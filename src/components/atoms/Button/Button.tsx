@@ -8,7 +8,10 @@ function Button({ children, className = 'bg-gray300', ...props }: ButtonProps) {
     <button
       type="button"
       {...props}
-      className={classnames('px-5', 'py-3', 'rounded', className)}
+      className={classnames(
+        'px-4 py-2 rounded shadow-md shadow-gray500/40 text-sm',
+        className
+      )}
     >
       {children}
     </button>

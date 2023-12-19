@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/atoms/Button/Button';
 import { useToast } from '@/hooks/Custom/Toast/ToastProvider';
 
 export default function Home() {
@@ -10,7 +11,11 @@ export default function Home() {
       <h2>누구십니까</h2>
       <h3>안녕하세요</h3>
       <ul>
-        <li onClick={() => addToast('toast메세지가 발생했습니다!!')}>sad</li>
+        <Button
+          onClick={() => addToast.success('toast메세지가 발생했습니다!!')}
+        >
+          sad
+        </Button>
       </ul>
     </main>
   );
