@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import Input from '../atoms/Input';
 import TextArea from '../atoms/TextArea';
-import Button from '../atoms/Button';
+import Button from '../atoms/Button/Button';
 import SvgIcon from '../atoms/SvgIcon';
 import { useCreateErrorReport } from '@/hooks/Common/Mutate/useCreateErrorReport';
 

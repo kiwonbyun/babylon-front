@@ -16,11 +16,9 @@ const ToastContainer = ({ toasts }: { toasts: Toasts[] }) => {
 
   return isClient
     ? createPortal(
-        <div className="absolute w-full">
+        <div>
           {toasts.map((toast) => (
-            <Toast key={toast.id} id={toast.id}>
-              {toast.content}
-            </Toast>
+            <Toast key={toast.id}>{toast.content}</Toast>
           ))}
         </div>,
         document.body

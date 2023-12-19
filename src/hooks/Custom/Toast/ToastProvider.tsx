@@ -14,7 +14,7 @@ interface Toasts {
 }
 
 const ToastContext = createContext<{
-  addToast: (content: string) => void;
+  addToast: (content: string, duration?: number) => void;
   removeToast: (id: number) => void;
 }>({
   addToast: () => {},
@@ -24,20 +24,27 @@ let id = 1;
 
 const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<Toasts[]>([]);
-
-  const addToast = useCallback(
-    (content: string) => {
-      setToasts([{ id: id++, content }]);
-    },
-    [setToasts]
-  );
-
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
   const removeToast = useCallback(
     (id: number) => {
       setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
     },
     [setToasts]
   );
+
+  const addToast = useCallback(
+    (content: string, durations = 2000) => {
+      setToasts([{ id: id++, content }]);
+
+      if (timeoutId) clearTimeout(timeoutId);
+      const timeout = setTimeout(() => {
+        setToasts([]);
+      }, durations);
+      setTimeoutId(timeout);
+    },
+    [setToasts, timeoutId]
+  );
+
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}

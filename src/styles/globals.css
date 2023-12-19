@@ -131,7 +131,7 @@ section {
 /* Body styles */
 body {
   line-height: 1;
-  height: 100vh;
+  min-width: 360px;
 }
 
 /* Remove list styles from ul and ol elements */
