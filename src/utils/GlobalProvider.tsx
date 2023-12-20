@@ -1,13 +1,15 @@
 'use client';
+import ToastProvider from '@/hooks/Custom/Toast/ToastProvider';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
 import { useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
 };
 
-function ReactQueryProvider({ children }: Props) {
+function GlobalProvider({ children }: Props) {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {
@@ -20,10 +22,12 @@ function ReactQueryProvider({ children }: Props) {
   );
   return (
     <QueryClientProvider client={client}>
-      {children}
+      <ReactQueryStreamedHydration>
+        <ToastProvider>{children}</ToastProvider>
+      </ReactQueryStreamedHydration>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
 
-export default ReactQueryProvider;
+export default GlobalProvider;

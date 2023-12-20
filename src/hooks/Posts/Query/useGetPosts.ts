@@ -7,6 +7,6 @@ export const useGetPosts = () => {
   return useQuery({
     queryKey: postsKeys.getPosts(),
     queryFn: postsApi.getPosts,
-    staleTime: convertMinToMS(10),
+    staleTime: convertMinToMS(5),
   });
 };
