@@ -1,5 +1,5 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
-import Button from './Button';
+import Button from '@/components/atoms/Button/Button';
 
 interface ThrottleButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,7 +26,12 @@ const ThrottleButton = ({
   };
 
   return (
-    <Button {...props} onClick={handleClick}>
+    <Button
+      {...props}
+      onClick={handleClick}
+      disabled={clickDisabled}
+      className="disabled:opacity-50 disabled:cursor-not-allowed"
+    >
       {children}
     </Button>
   );

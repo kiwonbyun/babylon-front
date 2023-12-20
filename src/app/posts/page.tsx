@@ -8,7 +8,7 @@ function Posts() {
   return (
     <div>
       page
-      <ThrottleButton onClick={() => addToast.error('에러발생!')}>
+      <ThrottleButton onClick={() => addToast.error('에러발생!', 500)}>
         sad
       </ThrottleButton>
     </div>
