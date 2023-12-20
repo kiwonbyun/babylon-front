@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${notoSansKR.className}`}>
+      <body className={notoSansKR.className}>
         <GlobalProvider>
           <Header />
           {children}

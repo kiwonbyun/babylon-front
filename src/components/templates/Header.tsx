@@ -1,35 +1,34 @@
 import Link from 'next/link';
 import React from 'react';
+import Button from '../atoms/Button/Button';
+import Image from 'next/image';
 
 function Header() {
   return (
-    <header className="w-full bg-white h-10 flex justify-between items-center px-4">
-      <ul className="flex-box gap-2">
-        <li>
-          <Link href={'/'}>
-            <h1 className=" text-2xl font-extrabold text-green500 tracking-tight">
-              BABYLON
-            </h1>
-          </Link>
-        </li>
-        <li>
-          <Link href={'/posts'} className="text-sm">
-            게시물
-          </Link>
-        </li>
+    <header className="w-full bg-white h-14 flex justify-between items-center px-4 shadow-md mb-2">
+      <ul className="flex-box gap-3">
+        <Link href={'/'}>
+          <h1 className=" text-2xl font-extrabold text-green500 tracking-tight">
+            BABYLON
+          </h1>
+        </Link>
+        <small className="text-gray400 text-xs sm:hidden">
+          Spreading knowledge for a better tomorrow
+        </small>
       </ul>
-      <ul className="flex-box gap-2">
-        <li>
-          <Link href={'/login'} className="text-sm">
-            로그인
-          </Link>
-        </li>
-        <li>
-          <Link href={'/signup'} className="text-sm">
-            회원가입
-          </Link>
-        </li>
-        <li>user</li>
+      <ul className="flex-box gap-4 text-sm text-gray700">
+        <Link href={'/posts'}>게시물</Link>
+        <Link href={'/login'}>
+          <Button className="bg-green100 shadow-none">로그인</Button>
+        </Link>
+        <Link href={'/mypage'}>
+          <Image
+            src="/default-profile.webp"
+            alt="image"
+            width={38}
+            height={38}
+          />
+        </Link>
       </ul>
     </header>
   );

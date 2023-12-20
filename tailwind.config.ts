@@ -127,6 +127,10 @@ const config: Config = {
       md: { min: '768px', max: '1023px' },
       lg: { min: '1024px' },
     },
+    fontSize: {
+      xxs: ['0.625rem', { lineHeight: '1rem' }],
+    },
+
     extend: {
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],
