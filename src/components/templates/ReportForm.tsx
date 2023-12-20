@@ -7,7 +7,11 @@ import TextArea from '../atoms/TextArea';
 import Button from '../atoms/Button/Button';
 import SvgIcon from '../atoms/SvgIcon';
 import { useCreateErrorReport } from '@/hooks/Common/Mutate/useCreateErrorReport';
+import { useToast } from '@/hooks/Custom/Toast/ToastProvider';
 
+interface IReportFromProps {
+  closeForm: () => void;
+}
 interface IFormInput {
   name: string;
   email: string;
@@ -20,7 +24,7 @@ const schema = yup.object().shape({
   content: yup.string().required(),
 });
 
-function ReportForm({ closeForm }: { closeForm: () => void }) {
+function ReportForm({ closeForm }: IReportFromProps) {
   const { register, reset, handleSubmit, formState } = useForm<IFormInput>({
     defaultValues: {
       name: '',
@@ -31,6 +35,7 @@ function ReportForm({ closeForm }: { closeForm: () => void }) {
   });
   const { errors } = formState;
   const { mutateAsync } = useCreateErrorReport();
+  const { addToast } = useToast();
 
   const onSubmit = handleSubmit((data) => {
     mutateAsync({
@@ -38,15 +43,15 @@ function ReportForm({ closeForm }: { closeForm: () => void }) {
       email: data.email,
       content: data.content,
     }).then(() => {
+      addToast.success(
+        <div className="flex-col-box">
+          <p>오류 제보가 완료되었습니다!</p>
+          <p>빠른 시일 내에 수정하겠습니다.</p>
+        </div>
+      );
       closeForm();
     });
   });
-
-  useEffect(() => {
-    return () => {
-      reset();
-    };
-  }, []);
 
   return (
     <section className="mt-10 flex-col-box gap-10">

@@ -10,13 +10,13 @@ import ToastContainer from './ToastContainer';
 
 export interface IToasts {
   id: number;
-  content: string;
+  content: string | ReactNode;
   type: 'success' | 'error';
 }
 
 interface ToastProviderProps {
   addToast: {
-    success: (content: string, duration?: number) => void;
+    success: (content: string | ReactNode, duration?: number) => void;
     error: (content: string, duration?: number) => void;
   };
   removeToast: (id: number) => void;
@@ -39,7 +39,7 @@ const ToastProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const addToast = {
-    success: (content: string, durations = 2000) => {
+    success: (content: string | ReactNode, durations = 2000) => {
       setToasts([{ id: id++, content, type: 'success' }]);
 
       if (timeoutId) clearTimeout(timeoutId);

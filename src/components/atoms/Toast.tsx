@@ -11,7 +11,7 @@ const Toast = ({
   return (
     <div
       className={classNames(
-        'border border-black absolute top-1/6 right-1/2 translate-x-1/2 max-w-fit px-6 py-4 rounded bg-opacity-50 text-white text-base',
+        'absolute top-1/6 right-1/2 translate-x-1/2 max-w-fit px-6 py-4 rounded bg-opacity-50 text-white text-base sm:text-sm break-keep',
         {
           'bg-gray900': type === 'success',
           'bg-red700': type === 'error',

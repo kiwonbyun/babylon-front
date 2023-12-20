@@ -1,16 +1,17 @@
 'use client';
 
 import { useToast } from '@/hooks/Custom/Toast/ToastProvider';
-import ThrottleButton from '@/components/atoms/Button/ThrottleButton';
+import { useGetPosts } from '@/hooks/Posts/Query/useGetPosts';
 
 function Posts() {
   const { addToast } = useToast();
+  const { data } = useGetPosts();
+
   return (
     <div>
-      page
-      <ThrottleButton onClick={() => addToast.error('에러발생!', 500)}>
-        sad
-      </ThrottleButton>
+      <section>
+        <p>{data?.[0].title}</p>
+      </section>
     </div>
   );
 }

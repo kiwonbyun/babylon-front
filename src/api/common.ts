@@ -1,7 +1,7 @@
 import axios from 'axios';
 import client from './client';
-import { ErrorReportData } from './interfaces';
+import { ErrorReportData } from '@/types/commonApi';
 
 export const errorReport = (data: ErrorReportData) => {
-  return axios.post('http://localhost:8000/common/error', data);
+  return client.post('/common/error', data);
 };
