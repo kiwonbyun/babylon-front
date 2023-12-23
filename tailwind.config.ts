@@ -1,5 +1,7 @@
-import { ThemeColors } from '@/styles/themeColors';
 import type { Config } from 'tailwindcss';
+import fs from 'node:fs';
+import path from 'node:path';
+import plaiceholder from '@plaiceholder/tailwindcss';
 
 const config: Config = {
   content: [
@@ -145,7 +147,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plaiceholder({
+      resolver: (src) => fs.readFileSync(path.join('./public', `${src}.jpg`)),
+    }),
+  ],
 };
 
 export default config;

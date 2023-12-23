@@ -1,34 +1,51 @@
-import { useGetBanners } from '@/hooks/Common/Query/useGetBanner';
 import { Banner } from '@/types/commonApi';
-import { convertMinToMS } from '@/utils/convertTimeToMS';
-
 import Image from 'next/image';
+import { getPlaiceholder } from 'plaiceholder';
+
+const getBanner = async () => {
+  const res = await fetch(`${process.env.SERVER_URL}/banners`, {
+    cache: 'no-store',
+  });
+
+  const data = (await res.json()) as Banner[];
+
+  const images_data = await Promise.all(
+    data.slice(0, 6).map(async (item) => {
+      const buffer = await fetch(item.bannerImage).then(async (res) =>
+        Buffer.from(await res.arrayBuffer())
+      );
+      const { base64 } = await getPlaiceholder(buffer);
+      return {
+        ...item,
+        base64: base64,
+      };
+    })
+  ).then((value) => value);
+
+  return images_data;
+};
 
 export default async function Home() {
-  const res = await fetch(`${process.env.SERVER_URL}/banners`, {
-    next: { revalidate: convertMinToMS(10) },
-  });
-  const data = (await res.json()) as Banner[];
+  const banners = await getBanner();
 
   return (
     <main>
-      {data?.map((banner) => (
-        <div className="relative w-full h-80" key={banner.id}>
-          <Image
-            src={banner.bannerImage}
-            alt="main_banner"
-            fill
-            style={{ objectFit: 'contain', objectPosition: 'center' }}
-            priority
-            placeholder="blur"
-            blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII="
-          />
-        </div>
-      ))}
-
-      <h1>cd</h1>
-      <h2>누구십니까</h2>
-      <h3>안녕하세요</h3>
+      <div className="grid grid-cols-2">
+        {banners.map((banner) => (
+          <div className="relative h-80" key={banner.id}>
+            <Image
+              src={banner.bannerImage}
+              alt="main_banner"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              priority
+              placeholder="blur"
+              blurDataURL={banner.base64}
+            />
+          </div>
+        ))}
+      </div>
+      <h1>?asd</h1>
     </main>
   );
 }
