@@ -1,10 +1,8 @@
 'use client';
 
-import { useToast } from '@/hooks/Custom/Toast/ToastProvider';
 import { useGetPosts } from '@/hooks/Posts/Query/useGetPosts';
 
 function Posts() {
-  const { addToast } = useToast();
   const { data } = useGetPosts();
 
   return (

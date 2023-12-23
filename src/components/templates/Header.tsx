@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 function Header() {
   return (
-    <header className="w-full bg-white h-14 flex justify-between items-center px-4 shadow-md mb-2">
+    <header className="w-full bg-white h-14 flex justify-between items-center px-4 shadow-md">
       <ul className="flex-box gap-3">
         <Link href={'/'}>
           <h1 className=" text-2xl font-extrabold text-green500 tracking-tight">
@@ -13,7 +13,7 @@ function Header() {
           </h1>
         </Link>
         <small className="text-gray400 text-xs sm:hidden">
-          Spreading knowledge for a better tomorrow
+          Spreading your insight for a better tomorrow
         </small>
       </ul>
       <ul className="flex-box gap-4 text-sm text-gray700">

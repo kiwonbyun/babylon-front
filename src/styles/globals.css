@@ -24,6 +24,10 @@
 } */
 /* styles/globals.css */
 
+* {
+  box-sizing: border-box;
+}
+
 /* Reset some default styles */
 html,
 body,
