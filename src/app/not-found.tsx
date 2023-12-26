@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <main className="pt-9">
       <section className="flex-col-box gap-8 w-3/4 sm:w-full mx-auto rounded-lg">
-        <header className="text-8xl text-green400 font-bold tracking-widest">
+        <header className="text-green400 font-bold tracking-widest text-8xl">
           404
         </header>
         <article className="flex-col-box gap-4 text-center">

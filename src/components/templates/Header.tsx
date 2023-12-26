@@ -8,7 +8,7 @@ function Header() {
     <header className="w-full bg-white h-14 flex justify-between items-center px-4 shadow-md">
       <ul className="flex-box gap-3">
         <Link href={'/'}>
-          <h1 className=" text-2xl font-extrabold text-green500 tracking-tight">
+          <h1 className=" text-2xl font-extrabold text-green400 tracking-tight">
             BABYLON
           </h1>
         </Link>
