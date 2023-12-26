@@ -134,6 +134,9 @@ const config: Config = {
     },
 
     extend: {
+      backgroundImage: {
+        login: "url('/login-bg.webp')",
+      },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],
         sm: ['0.875rem', { lineHeight: '1.25rem' }],

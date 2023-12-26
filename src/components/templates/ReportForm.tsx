@@ -60,13 +60,13 @@ function ReportForm({ closeForm }: IReportFromProps) {
         <Input
           {...register('name')}
           placeholder="이름"
-          className={`w-1/2 ${errors.name ? 'border-b-red600' : 'none'} `}
+          className={`w-1/2 ${errors.name ? 'border-red600' : 'none'} `}
           type="text"
         />
         <Input
           {...register('email')}
           placeholder="이메일"
-          className={`w-3/4 ${errors.email ? 'border-b-red600' : 'none'} `}
+          className={`w-3/4 ${errors.email ? 'border-red600' : 'none'} `}
           type="text"
         />
         <TextArea

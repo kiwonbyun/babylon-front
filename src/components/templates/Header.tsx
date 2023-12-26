@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Button from '../atoms/Button/Button';
 import Image from 'next/image';
+import { SERVICE_MISSION } from '@/constants/common';
 
 function Header() {
   return (
@@ -13,7 +14,7 @@ function Header() {
           </h1>
         </Link>
         <small className="text-gray400 text-xs sm:hidden">
-          Spreading your insight for a better tomorrow
+          {SERVICE_MISSION}
         </small>
       </ul>
       <ul className="flex-box gap-4 text-sm text-gray700">
