@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import React from 'react';
-import Button from '../atoms/Button/Button';
 import Image from 'next/image';
 import { SERVICE_MISSION } from '@/constants/common';
+import Button from '@components/atoms/Button/Button';
+import Logo from '@components/atoms/Logo';
 
 function Header() {
   return (
     <header className="w-full bg-white h-14 flex justify-between items-center px-4 shadow-md">
       <ul className="flex-box gap-3">
         <Link href={'/'}>
-          <h1 className=" text-2xl font-extrabold text-green400 tracking-tight">
-            BABYLON
-          </h1>
+          <Logo />
         </Link>
         <small className="text-gray400 text-xs sm:hidden">
           {SERVICE_MISSION}
