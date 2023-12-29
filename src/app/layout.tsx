@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Noto_Sans_KR } from 'next/font/google';
 import '@/styles/globals.css';
 import GlobalProvider from '@/utils/GlobalProvider';
 
-const notoSansKR = Noto_Sans_KR({ subsets: [] });
+import classNames from 'classnames';
+import { fontNotoSansKR } from './fonts';
 
 export const metadata: Metadata = {
   title: 'BABYLON: Share your insights',
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={notoSansKR.className}>
+      <body className={classNames(fontNotoSansKR.className, 'antialiased')}>
         <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>

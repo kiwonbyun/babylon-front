@@ -3,12 +3,13 @@ import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
 import LabeledInput from '@/components/molecules/LabeledInput';
 import LoginTemplate from '@/components/templates/LoginTemplate';
+import classNames from 'classnames';
 import React from 'react';
 
 const Login = () => {
   return (
     <LoginTemplate>
-      <section className="h-full">
+      <section className={classNames('h-full')}>
         <div className="h-1/2 flex-col-box gap-6">
           <Logo />
           <form className="flex-col-box gap-2">
