@@ -7,7 +7,13 @@ interface MypageLayoutProps {
 }
 
 const MypageLayout = ({ children }: MypageLayoutProps) => {
-  return <main>{children}</main>;
+  return (
+    <main>
+      <Header />
+      {children}
+      <Footer />
+    </main>
+  );
 };
 
 export default MypageLayout;

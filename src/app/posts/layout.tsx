@@ -7,7 +7,13 @@ interface PostsLayoutProps {
 }
 
 const PostsLayout = ({ children }: PostsLayoutProps) => {
-  return <main>{children}</main>;
+  return (
+    <main>
+      <Header />
+      {children}
+      <Footer />
+    </main>
+  );
 };
 
 export default PostsLayout;

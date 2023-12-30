@@ -9,10 +9,7 @@ interface LoginTemplateProps {
 
 const LoginTemplate = ({ children }: LoginTemplateProps) => {
   return (
-    <main
-      className="flex overflow-auto sm:flex-col"
-      style={{ height: 'calc(100vh - 64px)' }}
-    >
+    <main className="flex overflow-auto sm:flex-col h-screen">
       <figure className="w-1/2 flex-box relative bg-login bg-center bg-cover sm:h-44 sm:w-full">
         <h3
           className={classNames(

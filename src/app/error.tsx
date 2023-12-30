@@ -1,12 +1,9 @@
 'use client'; // Error components must be Client Components
-
 import Button from '@/components/atoms/Button/Button';
 import Logo from '@/components/atoms/Logo';
-import Header from '@/components/templates/Header';
 import { SERVICE_MISSION } from '@/constants/common';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { fontEmoji, fontNotoSansKR } from './fonts';
+import { fontEmoji } from './fonts';
 
 export default function Error({
   error,
@@ -15,11 +12,6 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.log(error.message);
-  }, [error]);
-
   return (
     <div>
       <header className="w-full bg-white h-16 flex justify-between items-center px-6 shadow-md">

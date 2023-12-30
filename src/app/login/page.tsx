@@ -1,15 +1,17 @@
 import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
+import Google from '@/components/icons/Google';
+import Kakao from '@/components/icons/Kakao';
 import LabeledInput from '@/components/molecules/LabeledInput';
 import { loginCheck, loginServerAction } from '@/utils/serverActions';
 import classNames from 'classnames';
 import Link from 'next/link';
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { fontPoppinsEN } from '../fonts';
 
 const Login = async () => {
   const loginUser = await loginCheck();
-  console.log(loginUser);
 
   if (loginUser) {
     throw new Error('이미 로그인 되어있습니다.');
@@ -40,14 +42,51 @@ const Login = async () => {
               로그인
             </Button>
             <Link href={'/login/signup'}>
-              <Button className="w-64">회원가입</Button>
+              <Button className="w-64 bg-gray100">회원가입</Button>
             </Link>
           </div>
         </form>
       </div>
       <Divider className="mx-4">or</Divider>
-      <div>social</div>
+      <div className="flex-col-box gap-4 h-1/3">
+        <SnsLoginButton
+          icon={<Kakao />}
+          text="Continue with Kakao"
+          className="bg-[#FEE500]"
+        />
+        <SnsLoginButton
+          icon={<Google />}
+          text="Continue with Google"
+          className="bg-[#4285F4]"
+        />
+      </div>
     </section>
+  );
+};
+
+const SnsLoginButton = ({
+  icon,
+  text,
+  className,
+}: {
+  icon: ReactNode;
+  text: string;
+  className?: string;
+}) => {
+  return (
+    <div className="bg-gray100 w-60 flex rounded cursor-pointer">
+      <div className={classNames('rounded-l h-10 w-12 flex-box', className)}>
+        {icon}
+      </div>
+      <h3
+        className={classNames(
+          'flex items-center justify-center w-full text-slate800 font-medium',
+          fontPoppinsEN.className
+        )}
+      >
+        {text}
+      </h3>
+    </div>
   );
 };
 

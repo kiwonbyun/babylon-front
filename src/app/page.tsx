@@ -1,4 +1,6 @@
 import Carousel from '@/components/molecules/Carousel';
+import Footer from '@/components/templates/Footer';
+import Header from '@/components/templates/Header';
 import { Banner } from '@/types/commonApi';
 
 const getBanner = async () => {
@@ -15,6 +17,7 @@ export default async function Home() {
 
   return (
     <main className="overflow-hidden">
+      <Header />
       <Carousel className="w-full" items={banners} renderKey="bannerImage" />
 
       {/* <div className="grid grid-cols-2">
@@ -33,6 +36,7 @@ export default async function Home() {
         ))}
       </div> */}
       <h1>?asd</h1>
+      <Footer />
     </main>
   );
 }

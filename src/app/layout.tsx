@@ -4,8 +4,6 @@ import GlobalProvider from '@/utils/GlobalProvider';
 
 import classNames from 'classnames';
 import { fontNotoSansKR } from './fonts';
-import Header from '@/components/templates/Header';
-import Footer from '@/components/templates/Footer';
 
 export const metadata: Metadata = {
   title: 'BABYLON: Share your insights',
@@ -21,11 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={classNames(fontNotoSansKR.className, 'antialiased')}>
-        <GlobalProvider>
-          <Header />
-          {children}
-          <Footer />
-        </GlobalProvider>
+        <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>
   );
