@@ -5,7 +5,7 @@ import React from 'react';
 
 const Logo = () => {
   return (
-    <Link className="flex relative" href="/">
+    <Link className="flex relative w-fit" href="/">
       <span
         className={classNames(
           'text-3xl absolute bottom-3 right-24',

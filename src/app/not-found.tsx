@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/atoms/Button/Button';
+import Header from '@/components/templates/Header';
 import ReportForm from '@/components/templates/ReportForm';
 import Link from 'next/link';
 import React, { useState } from 'react';

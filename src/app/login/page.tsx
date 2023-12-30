@@ -2,12 +2,18 @@ import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
 import LabeledInput from '@/components/molecules/LabeledInput';
-import { loginServerAction } from '@/utils/serverActions';
+import { loginCheck, loginServerAction } from '@/utils/serverActions';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
-const Login = () => {
+const Login = async () => {
+  const loginUser = await loginCheck();
+  console.log(loginUser);
+
+  if (loginUser) {
+    throw new Error('이미 로그인 되어있습니다.');
+  }
   return (
     <section className={classNames('h-full')}>
       <div className="h-1/2 flex-col-box gap-6">
