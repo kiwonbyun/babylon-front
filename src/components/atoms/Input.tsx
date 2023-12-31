@@ -1,7 +1,9 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: string[];
+}
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
@@ -10,7 +12,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       ref={ref}
       className={classNames(
         'border outline-none rounded outline-1 border-gray300 px-4 py-3 focus:border-blue400 placeholder:font-light',
-        props.className
+        props.className,
+        {
+          'border-red500': props.error,
+        }
       )}
     />
   );

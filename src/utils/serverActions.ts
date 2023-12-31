@@ -12,31 +12,49 @@ async function decodeJwt(jwt: string | undefined) {
   return decoded;
 }
 
+export type State = {
+  errors?: {
+    email?: string[];
+    password?: string[];
+  };
+  message: string | null;
+};
+
 const loginSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().email({ message: '이메일 형식이 올바르지 않습니다.' }),
+  password: z
+    .string()
+    .min(8, { message: '비밀번호는 최소 8자 이상이어야 합니다.' }),
 });
 
-export async function loginServerAction(formData: FormData) {
-  const rawFormData = loginSchema.parse({
+export async function loginServerAction(prevState: State, formData: FormData) {
+  const validatedFields = loginSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
   });
-  const { email, password } = rawFormData;
-  const base64encoded = btoa(`${email}:${password}`);
-  const res = await login(base64encoded);
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: '',
+    };
+  }
+  const { email, password } = validatedFields.data;
 
-  cookies().set('accessToken', res.accessToken, {
-    maxAge: 60 * 60 * 24 * 1, // 1 day
-    httpOnly: true,
-  });
-  cookies().set('refreshToken', res.refreshToken, {
-    maxAge: 60 * 60 * 24 * 30, // 30 days
-    httpOnly: true,
-  });
+  try {
+    const base64encoded = btoa(`${email}:${password}`);
+    const res = await login(base64encoded);
 
-  if (res.accessToken) {
-    redirect('/');
+    cookies().set('accessToken', res.accessToken, {
+      maxAge: 60 * 60 * 24 * 1, // 1 day
+      httpOnly: true,
+    });
+    cookies().set('refreshToken', res.refreshToken, {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      httpOnly: true,
+    });
+    return { message: 'success' };
+  } catch (err: any) {
+    return { message: err.response.data.message };
   }
 }
 
