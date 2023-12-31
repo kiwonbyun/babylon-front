@@ -20,7 +20,7 @@ const LabeledInput = ({ ...props }: InputProps) => {
           {props?.error && (
             <p className="text-xs text-red500 flex items-center gap-1">
               <Exclamation className="h-4 w-4" />
-              {props.error}
+              {props.error[0]}
             </p>
           )}
         </label>

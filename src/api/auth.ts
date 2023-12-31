@@ -1,3 +1,4 @@
+import { SignupDataType } from '@/types/authApi';
 import client from './client';
 
 export const login = (base64encoded: string) =>
@@ -8,3 +9,6 @@ export const login = (base64encoded: string) =>
       },
     })
     .then((res) => res.data);
+
+export const signup = (data: SignupDataType) =>
+  client.post('/auth/register/email', data).then((res) => res.data);
