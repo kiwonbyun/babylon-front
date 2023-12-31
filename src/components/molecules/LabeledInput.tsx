@@ -3,15 +3,18 @@ import Input from '@components/atoms/Input';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  id: string;
+  desc?: string;
 }
 
 const LabeledInput = ({ ...props }: InputProps) => {
   return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={props.id} className="text-xs">
-        {props.label}
-      </label>
+    <div className="flex flex-col items-start gap-1">
+      <div>
+        <label htmlFor={props.id} className="text-sm font-medium">
+          {props.label}
+        </label>
+        {props.desc && <p className="text-xs text-gray500">{props.desc}</p>}
+      </div>
       <Input {...props} />
     </div>
   );
