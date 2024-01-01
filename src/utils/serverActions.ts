@@ -127,3 +127,18 @@ export const signupServerAction = async (
     return { message: err.response.data.message };
   }
 };
+
+export const saveTokenServerAction = async (
+  accessToken: string,
+  refreshToken: string
+) => {
+  cookies().set('accessToken', accessToken, {
+    maxAge: 60 * 60 * 24 * 1, // 1 day
+    httpOnly: true,
+  });
+  cookies().set('refreshToken', refreshToken, {
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+    httpOnly: true,
+  });
+  return { message: 'success' };
+};

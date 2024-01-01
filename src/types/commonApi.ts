@@ -5,9 +5,9 @@ export interface ErrorReportData {
 }
 
 export interface CustomError {
-  message: string;
-  error: string;
-  statusCode: number;
+  response?: {
+    data: { message?: string; error?: string; statusCode?: number };
+  };
 }
 
 export interface Banner {

@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
+import { FieldError } from 'react-hook-form';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: string[];
+  error?: string[] | string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
