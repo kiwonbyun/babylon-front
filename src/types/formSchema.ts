@@ -5,6 +5,7 @@ export type SignupFormInputType = {
   password: string;
   passwordConfirm: string;
   nickname: string;
+  code: string;
 };
 
 export const signupSchema = z

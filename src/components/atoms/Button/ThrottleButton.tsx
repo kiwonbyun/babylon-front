@@ -1,16 +1,19 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import Button from '@/components/atoms/Button/Button';
+import classNames from 'classnames';
 
 interface ThrottleButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   throttleTime?: number;
+  className?: string;
 }
 
 const ThrottleButton = ({
   children,
   onClick,
   throttleTime = 1000,
+  className,
   ...props
 }: ThrottleButtonProps) => {
   const [clickDisabled, setClickDisabled] = useState(false);
@@ -30,7 +33,10 @@ const ThrottleButton = ({
       {...props}
       onClick={handleClick}
       disabled={clickDisabled}
-      className="disabled:opacity-50 disabled:cursor-not-allowed"
+      className={classNames(
+        'disabled:opacity-50 disabled:cursor-not-allowed',
+        className
+      )}
     >
       {children}
     </Button>

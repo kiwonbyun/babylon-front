@@ -16,5 +16,11 @@ export const signup = (data: SignupDataType) =>
 export const sendEmailVerity = (email: string) =>
   client.post('/auth/verify/email', { email }).then((res) => res.data);
 
-export const confirmEmailVerify = (email: string, code: string) =>
+export const confirmEmailVerify = ({
+  email,
+  code,
+}: {
+  email: string;
+  code: string;
+}) =>
   client.post('/auth/confirm/email', { email, code }).then((res) => res.data);
