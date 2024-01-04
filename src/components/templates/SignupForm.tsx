@@ -6,10 +6,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignupFormInputType, signupSchema } from '@/types/formSchema';
 
-import { RolesEnum } from '@/types/authApi';
+import { RolesEnum } from '@/types/authInterface';
 import { useCreateUser } from '@/hooks/Auth/Mutate/useCreateUser';
-import { saveTokenServerAction } from '@/utils/serverActions';
-import { CustomError } from '@/types/commonApi';
+import { saveTokenServerAction } from '@/app/lib/serverActions';
+import { CustomError } from '@/types/commonInterface';
 import { EMAIL_REGEX } from '@/constants/common';
 import { useCreateVerifyCode } from '@/hooks/Auth/Mutate/useCreateVerifyCode';
 import { useConfirmVerifyCode } from '@/hooks/Auth/Mutate/useConfirmVerifyCode';

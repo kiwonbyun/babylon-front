@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
-import { loginServerAction } from '@/utils/serverActions';
+import { loginServerAction } from '@/app/lib/serverActions';
 import LabeledInput from '@components/molecules/LabeledInput';
 import Button from '@components/atoms/Button/Button';
 import Link from 'next/link';

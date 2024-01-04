@@ -1,4 +1,4 @@
-import { SignupDataType } from '@/types/authApi';
+import { SignupDataType } from '@/types/authInterface';
 import client from './client';
 
 export const login = (base64encoded: string) =>

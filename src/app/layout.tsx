@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 import GlobalProvider from '@/utils/GlobalProvider';
 
 import classNames from 'classnames';
-import { fontNotoSansKR } from './fonts';
+import { fontNotoSansKR } from './lib/fonts';
 
 export const metadata: Metadata = {
   title: 'BABYLON: Share your insights',

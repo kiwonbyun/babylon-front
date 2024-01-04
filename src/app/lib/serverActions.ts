@@ -4,7 +4,7 @@ import { login, signup } from '@/api/auth';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { jwtDecode } from 'jwt-decode';
-import { RolesEnum } from '@/types/authApi';
+import { RolesEnum } from '@/types/authInterface';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;

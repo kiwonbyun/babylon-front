@@ -1,5 +1,5 @@
 import { authApi } from '@/api';
-import { CustomError } from '@/types/commonApi';
+import { CustomError } from '@/types/commonInterface';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCreateUser = () => {

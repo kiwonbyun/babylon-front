@@ -3,7 +3,7 @@ import Button from '@/components/atoms/Button/Button';
 import Logo from '@/components/atoms/Logo';
 import { SERVICE_MISSION } from '@/constants/common';
 import Link from 'next/link';
-import { fontEmoji } from './fonts';
+import { fontEmoji } from './lib/fonts';
 
 export default function Error({
   error,

@@ -2,7 +2,7 @@
 
 import Button from '@/components/atoms/Button/Button';
 import React from 'react';
-import { fontEmoji } from '../fonts';
+import { fontEmoji } from '../lib/fonts';
 import Link from 'next/link';
 import ReportForm from '@/components/templates/ReportForm';
 

@@ -1,7 +1,7 @@
 import Carousel from '@/components/molecules/Carousel';
 import Footer from '@/components/templates/Footer';
 import Header from '@/components/templates/Header';
-import { Banner } from '@/types/commonApi';
+import { Banner } from '@/types/commonInterface';
 
 const getBanner = async () => {
   const res = await fetch(`${process.env.SERVER_URL}/banners`, {
