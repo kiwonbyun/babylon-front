@@ -66,7 +66,10 @@ const Carousel = <T extends { link?: string }>({
     <AnimatePresence initial={false} custom={direction}>
       <motion.img
         alt={items[imageIndex][renderKey] as string}
-        className={classNames('h-72 object-cover object-center', className)}
+        className={classNames(
+          'aspect-banner object-cover object-center',
+          className
+        )}
         key={page}
         src={items[imageIndex][renderKey] as string}
         custom={direction}

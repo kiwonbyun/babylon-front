@@ -134,6 +134,9 @@ const config: Config = {
     },
 
     extend: {
+      aspectRatio: {
+        banner: '20 / 3',
+      },
       backgroundImage: {
         login: "url('/login-bg.webp')",
       },

@@ -13,8 +13,9 @@
 [organism]
 재사용을 목적으로 한다.
 여러개의 atoms, molecules, html을 포함한다.
-query, mutation을 직접 포함하지 않는다.
+query, mutation을 직접 포함할 수 있다.
 복잡한 로직을 포함할 수 있다.
+client component를 포함하고 서버사이드 fetch 함수를 호출하는 server component(데이터 주입 목적)
 
 [template]
 재사용을 목적으로 하지 않는다.
