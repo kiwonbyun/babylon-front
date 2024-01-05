@@ -1,8 +1,10 @@
 import { Post } from '@/types/postsInterface';
-import Image from 'next/image';
 import React from 'react';
 import { getPlaiceholder } from 'plaiceholder';
-import Button from '../atoms/Button/Button';
+import Button from '@components/atoms/Button/Button';
+import PlayBtnImage from '@components/molecules/PlayBtnImage';
+import BidPrice from '../molecules/BidPrice';
+import { moneyFormatter } from '@/utils/formatter';
 
 const getPosts = async () => {
   const res = await fetch(`${process.env.SERVER_URL}/posts`, {
@@ -28,39 +30,72 @@ export default async function MainPosts() {
   const posts = await getPosts();
 
   if (!posts.length) {
-    return <div>게시물이 없습니다.</div>;
+    return null;
   }
   const firstPost = posts[0];
   const lastPosts = posts.slice(1);
 
   return (
     <div className="w-5/6 mx-auto">
-      <div className="grid grid-cols-2 gap-4 my-5">
-        <article className="flex flex-col justify-center items-start gap-5">
-          <h3 className="text-3xl font-bold">{firstPost.title}</h3>
-          {firstPost.description && <p>{firstPost.description}</p>}
-          <div>
-            <span>현재 입찰가</span>
-            <span>{firstPost.bidPrice}</span>
+      <div className="grid grid-cols-2 gap-4 my-12">
+        <article className="flex flex-col justify-center items-start gap-5 cursor-pointer">
+          <h1 className="text-3xl font-bold line-clamp-1">{firstPost.title}</h1>
+          <span className="text-sm font-light text-gray900">
+            {firstPost.mentor.name}
+          </span>
+          {firstPost.description && (
+            <p className="break-keep max-w-[80%] leading-6 text-gray900 line-clamp-4">
+              {firstPost.description}
+            </p>
+          )}
+
+          <div className="flex items-center justify-between w-[80%]">
+            <BidPrice
+              price={moneyFormatter(firstPost.minPrice) + '+'}
+              label="최소 입찰가"
+            />
+            <BidPrice
+              price={moneyFormatter(firstPost.bidPrice)}
+              label="현재 입찰가"
+            />
+            <BidPrice
+              price={moneyFormatter(firstPost.maxPrice)}
+              label="최대 입찰가"
+            />
           </div>
-          <Button className="bg-black text-white font-medium">
-            자세히 보기
-          </Button>
         </article>
-        <figure className="relative aspect-video">
-          <Image
-            alt="first-thumbnail"
-            src={firstPost.thumbnails[0]}
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-            priority
-            placeholder="blur"
-            blurDataURL={firstPost.base64}
-          />
-        </figure>
+        <PlayBtnImage
+          alt="first-thumbnail"
+          src={firstPost.thumbnails[0]}
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          priority
+          placeholder="blur"
+          blurDataURL={firstPost.base64}
+        />
       </div>
-      <ul>
-        <li></li>
+      <ul className="grid grid-cols-3 gap-4">
+        {lastPosts.map((post) => (
+          <li key={post.id} className="w-full cursor-pointer">
+            <PlayBtnImage
+              alt={`posts-thumbnail-${post.id}`}
+              src={post.thumbnails[0]}
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              placeholder="blur"
+              blurDataURL={post.base64}
+            />
+
+            <div>
+              <h3 className="font-bold text-lg text-black break-keep">
+                {post.title}
+              </h3>
+              <span className="text-xs text-gray900 font-light">
+                {post.mentor.name}
+              </span>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
