@@ -35,8 +35,8 @@ export default async function MainPosts() {
   const restPosts = posts.slice(1);
 
   return (
-    <div className="w-5/6 mx-auto">
-      <div className="grid grid-cols-2 gap-4 my-12">
+    <div className="w-[90%] mx-auto my-12">
+      <div className="grid grid-cols-2 gap-4 mb-12">
         <article className="flex flex-col justify-center items-start gap-5 cursor-pointer">
           <h1 className="text-3xl font-bold line-clamp-1 hover:text-gray600">
             {firstPost.title}

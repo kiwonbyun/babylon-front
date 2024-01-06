@@ -10,7 +10,7 @@ function SkeletonLine({ className }: { className?: string }) {
 
 function MainPost() {
   return (
-    <div className={`${shimmer} grid grid-cols-2 gap-4 w-5/6 mx-auto my-12`}>
+    <div className={`${shimmer} grid grid-cols-2 gap-4 w-[90%] mx-auto my-12`}>
       <div className="aspect-video flex flex-col justify-center gap-5">
         <SkeletonLine className="w-96 h-9" />
         <SkeletonLine className="w-[100px] h-[20px]" />
@@ -28,7 +28,7 @@ function MainPost() {
 
 function RestPosts() {
   return (
-    <div className={`${shimmer} grid grid-cols-3 gap-4 w-5/6 mx-auto`}>
+    <div className={`${shimmer} grid grid-cols-3 gap-4 w-[90%] mx-auto`}>
       {Array.from({ length: 8 }).map((_, i) => (
         <div className="flex flex-col gap-1" key={i}>
           <SkeletonLine className="w-full aspect-video" />
