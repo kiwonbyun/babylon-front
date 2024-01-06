@@ -6,7 +6,10 @@ import classNames from 'classnames';
 import { fontNotoSansKR } from './lib/fonts';
 
 export const metadata: Metadata = {
-  title: 'BABYLON: Share your insights',
+  title: {
+    template: '%s | BABYLON: Share your insights',
+    default: 'BABYLON: Share your insights',
+  },
   description:
     'Share your insights with people. Creating a more prosperous world.',
 };

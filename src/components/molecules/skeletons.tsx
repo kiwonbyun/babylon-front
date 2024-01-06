@@ -1,30 +1,50 @@
+import classNames from 'classnames';
+
 // Loading animation
 const shimmer =
-  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
+  'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white before:to-transparent';
 
-export function CardSkeleton() {
+function SkeletonLine({ className }: { className?: string }) {
+  return <div className={classNames(`w-60 bg-gray200 rounded`, className)} />;
+}
+
+function MainPost() {
   return (
-    <div
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray100 p-2 shadow-sm`}
-    >
-      <div className="flex p-4">
-        <div className="h-5 w-5 rounded-md bg-gray200" />
-        <div className="ml-2 h-6 w-16 rounded-md bg-gray200 text-sm font-medium" />
+    <div className={`${shimmer} grid grid-cols-2 gap-4 w-5/6 mx-auto my-12`}>
+      <div className="aspect-video flex flex-col justify-center gap-5">
+        <SkeletonLine className="w-96 h-9" />
+        <SkeletonLine className="w-[100px] h-[20px]" />
+        <SkeletonLine className="w-4/5 h-[100px]" />
+        <div className="flex justify-between gap-28 w-[80%] h-12">
+          <SkeletonLine className="h-full" />
+          <SkeletonLine className="h-full" />
+          <SkeletonLine className="h-full" />
+        </div>
       </div>
-      <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
-        <div className="h-7 w-20 rounded-md bg-gray200" />
-      </div>
+      <div className="bg-gray100 aspect-video"></div>
     </div>
   );
 }
 
-export function CardsSkeleton() {
+function RestPosts() {
+  return (
+    <div className={`${shimmer} grid grid-cols-3 gap-4 w-5/6 mx-auto`}>
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div className="flex flex-col gap-1" key={i}>
+          <SkeletonLine className="w-full aspect-video" />
+          <SkeletonLine className="h-7 w-[80%]" />
+          <SkeletonLine className="h-4 w-[80px]" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function MainPostsSkeleton() {
   return (
     <>
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
+      <MainPost />
+      <RestPosts />
     </>
   );
 }

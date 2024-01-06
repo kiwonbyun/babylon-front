@@ -1,7 +1,6 @@
 import { Post } from '@/types/postsInterface';
 import React from 'react';
 import { getPlaiceholder } from 'plaiceholder';
-import Button from '@components/atoms/Button/Button';
 import PlayBtnImage from '@components/molecules/PlayBtnImage';
 import BidPrice from '../molecules/BidPrice';
 import { moneyFormatter } from '@/utils/formatter';
@@ -33,7 +32,7 @@ export default async function MainPosts() {
     return null;
   }
   const firstPost = posts[0];
-  const lastPosts = posts.slice(1);
+  const restPosts = posts.slice(1);
 
   return (
     <div className="w-5/6 mx-auto">
@@ -67,6 +66,7 @@ export default async function MainPosts() {
         <PlayBtnImage
           alt="first-thumbnail"
           src={firstPost.thumbnails[0]}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
           style={{ objectFit: 'cover', objectPosition: 'center' }}
           priority
@@ -75,7 +75,7 @@ export default async function MainPosts() {
         />
       </div>
       <ul className="grid grid-cols-3 gap-4">
-        {lastPosts.map((post) => (
+        {restPosts.map((post) => (
           <li key={post.id} className="w-full cursor-pointer">
             <PlayBtnImage
               alt={`posts-thumbnail-${post.id}`}
@@ -84,6 +84,7 @@ export default async function MainPosts() {
               style={{ objectFit: 'cover', objectPosition: 'center' }}
               placeholder="blur"
               blurDataURL={post.base64}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
 
             <div>
