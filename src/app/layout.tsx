@@ -21,7 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={classNames(fontNotoSansKR.className, 'antialiased')}>
+      <body
+        className={classNames(
+          fontNotoSansKR.className,
+          'antialiased scrollbar-hide'
+        )}
+      >
         <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>

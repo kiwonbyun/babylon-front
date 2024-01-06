@@ -158,6 +158,7 @@ const config: Config = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     plaiceholder({
       resolver: (src) => fs.readFileSync(path.join('./public', `${src}.jpg`)),
     }),

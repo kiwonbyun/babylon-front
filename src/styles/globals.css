@@ -156,11 +156,4 @@ a {
   .flex-col-box {
     @apply flex flex-col items-center justify-center;
   }
-  .hide-scroll {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
 }
