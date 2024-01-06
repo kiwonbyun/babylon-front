@@ -1,15 +1,16 @@
 import React, { forwardRef } from 'react';
 import Input from '@components/atoms/Input';
 import Exclamation from '../icons/Exclamation';
+import TextArea from '../atoms/TextArea';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   label: string;
   desc?: string;
   error?: string[] | string;
 }
 
-const LabeledInput = forwardRef<HTMLInputElement, InputProps>(
-  function LabeledInput(props, ref) {
+const LabeledTextArea = forwardRef<HTMLTextAreaElement, InputProps>(
+  function LabeledTextArea(props, ref) {
     return (
       <div className="flex flex-col items-start gap-1">
         <div>
@@ -27,10 +28,10 @@ const LabeledInput = forwardRef<HTMLInputElement, InputProps>(
           </label>
           {props.desc && <p className="text-xs text-gray500">{props.desc}</p>}
         </div>
-        <Input {...props} error={props?.error} ref={ref} />
+        <TextArea {...props} error={props?.error} ref={ref} />
       </div>
     );
   }
 );
 
-export default LabeledInput;
+export default LabeledTextArea;
