@@ -10,7 +10,7 @@ function SkeletonLine({ className }: { className?: string }) {
 
 function MainPost() {
   return (
-    <div className={`${shimmer} grid grid-cols-2 gap-4 w-[90%] mx-auto my-12`}>
+    <div className={`${shimmer} grid grid-cols-2 gap-4 w-[90%] mx-auto mb-12`}>
       <div className="aspect-video flex flex-col justify-center gap-5">
         <SkeletonLine className="w-96 h-9" />
         <SkeletonLine className="w-[100px] h-[20px]" />
@@ -42,9 +42,9 @@ function RestPosts() {
 
 export function MainPostsSkeleton() {
   return (
-    <>
+    <div className="my-12">
       <MainPost />
       <RestPosts />
-    </>
+    </div>
   );
 }
