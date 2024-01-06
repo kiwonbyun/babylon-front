@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 
 function Exclamation({ className }: { className?: string }) {
@@ -9,7 +9,7 @@ function Exclamation({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={classNames('w-6 h-6', className)}
+      className={clsx('w-6 h-6', className)}
     >
       <path
         strokeLinecap="round"

@@ -2,7 +2,7 @@ import { Post } from '@/types/postsInterface';
 import React from 'react';
 import { getPlaiceholder } from 'plaiceholder';
 import PlayBtnImage from '@components/molecules/PlayBtnImage';
-import BidPrice from '../molecules/BidPrice';
+import BidPrice from '../../molecules/BidPrice';
 import { moneyFormatter } from '@/utils/formatter';
 
 const getPosts = async () => {
@@ -38,7 +38,9 @@ export default async function MainPosts() {
     <div className="w-5/6 mx-auto">
       <div className="grid grid-cols-2 gap-4 my-12">
         <article className="flex flex-col justify-center items-start gap-5 cursor-pointer">
-          <h1 className="text-3xl font-bold line-clamp-1">{firstPost.title}</h1>
+          <h1 className="text-3xl font-bold line-clamp-1 hover:text-gray600">
+            {firstPost.title}
+          </h1>
           <span className="text-sm font-light text-gray900">
             {firstPost.mentor.name}
           </span>

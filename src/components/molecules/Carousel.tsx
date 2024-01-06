@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
 import { wrap } from 'popmotion';
 import imagePreloader from '@/utils/imagePreloader';
+import clsx from 'clsx';
 
 const variants = {
   enter: (direction: number) => {
@@ -66,10 +66,7 @@ const Carousel = <T extends { link?: string }>({
     <AnimatePresence initial={false} custom={direction}>
       <motion.img
         alt={items[imageIndex][renderKey] as string}
-        className={classNames(
-          'aspect-banner object-cover object-center',
-          className
-        )}
+        className={clsx('aspect-banner object-cover object-center', className)}
         key={page}
         src={items[imageIndex][renderKey] as string}
         custom={direction}

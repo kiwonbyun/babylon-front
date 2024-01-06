@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from '../molecules/Carousel';
+import Carousel from '../../molecules/Carousel';
 import { Banner } from '@/types/commonInterface';
 
 const getBanner = async () => {

@@ -1,5 +1,5 @@
 import { fontEmoji, fontPoppinsEN } from '@/app/lib/fonts';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <Link className="flex relative w-fit" href="/">
       <span
-        className={classNames(
+        className={clsx(
           'text-3xl absolute bottom-3 right-24',
           fontEmoji.className
         )}
@@ -15,7 +15,7 @@ const Logo = () => {
         🚀
       </span>
       <h1
-        className={classNames(
+        className={clsx(
           'text-2xl font-extrabold text-slate800 tracking-tight',
           fontPoppinsEN.className
         )}

@@ -1,11 +1,11 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 // Loading animation
 const shimmer =
   'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white before:to-transparent';
 
 function SkeletonLine({ className }: { className?: string }) {
-  return <div className={classNames(`w-60 bg-gray200 rounded`, className)} />;
+  return <div className={clsx(`w-60 bg-gray200 rounded`, className)} />;
 }
 
 function MainPost() {
@@ -21,7 +21,7 @@ function MainPost() {
           <SkeletonLine className="h-full" />
         </div>
       </div>
-      <div className="bg-gray100 aspect-video"></div>
+      <div className="bg-gray200 aspect-video"></div>
     </div>
   );
 }

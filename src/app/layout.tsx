@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import GlobalProvider from '@/utils/GlobalProvider';
 
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { fontNotoSansKR } from './lib/fonts';
 
 export const metadata: Metadata = {
@@ -22,10 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={classNames(
-          fontNotoSansKR.className,
-          'antialiased scrollbar-hide'
-        )}
+        className={clsx(fontNotoSansKR.className, 'antialiased scrollbar-hide')}
       >
         <GlobalProvider>{children}</GlobalProvider>
       </body>

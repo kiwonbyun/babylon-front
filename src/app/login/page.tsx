@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { fontPoppinsEN } from '../lib/fonts';
 import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
 import Google from '@/components/icons/Google';
 import Kakao from '@/components/icons/Kakao';
-import LoginForm from '@/components/templates/LoginForm';
+import LoginForm from '@/components/templates/Login/LoginForm';
 import { loginCheck } from '@/app/lib/serverActions';
 
 const Login = async () => {
@@ -16,7 +16,7 @@ const Login = async () => {
     redirect('/');
   }
   return (
-    <section className={classNames('h-full')}>
+    <section className={clsx('h-full')}>
       <div className="h-1/2 flex-col-box gap-6">
         <Logo />
         <LoginForm />
@@ -49,11 +49,11 @@ const SnsLoginButton = ({
 }) => {
   return (
     <div className="bg-gray100 w-60 flex rounded cursor-pointer">
-      <div className={classNames('rounded-l h-10 w-12 flex-box', className)}>
+      <div className={clsx('rounded-l h-10 w-12 flex-box', className)}>
         {icon}
       </div>
       <h3
-        className={classNames(
+        className={clsx(
           'flex items-center justify-center w-full text-slate800 font-medium',
           fontPoppinsEN.className
         )}

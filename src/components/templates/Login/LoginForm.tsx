@@ -5,7 +5,7 @@ import LabeledInput from '@components/molecules/LabeledInput';
 import Button from '@components/atoms/Button/Button';
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
-import Exclamation from '../icons/Exclamation';
+import Exclamation from '../../icons/Exclamation';
 
 function LoginForm() {
   const initialState = { message: '', errors: {} };

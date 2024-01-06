@@ -22,3 +22,4 @@ client component를 포함하고 서버사이드 fetch 함수를 호출하는 se
 query, mutation을 직접 포함할 수 있다.
 복잡한 로직을 포함할 수 있다.
 그 자체로 한 페이지를 이룰 수 있는 크기의 컴포넌트이다.
+page 바로 아래단계

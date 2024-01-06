@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -8,7 +8,7 @@ function Button({ children, className, ...props }: ButtonProps) {
     <button
       type="button"
       {...props}
-      className={classnames('px-4 py-2 rounded text-sm', className)}
+      className={clsx('px-4 py-2 rounded text-sm', className)}
     >
       {children}
     </button>

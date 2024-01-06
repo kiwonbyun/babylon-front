@@ -1,11 +1,11 @@
 import { MainPostsSkeleton } from '@/components/molecules/skeletons';
-import MainBanner from '@/components/organism/MainBanner';
-import MainPosts from '@/components/organism/MainPosts';
+import MainBanner from '@/components/templates/Home/MainBanner';
+import MainPosts from '@/components/templates/Home/MainPosts';
 import { Suspense } from 'react';
 
 export default async function Home() {
   return (
-    <main className="overflow-hidden">
+    <main>
       <MainBanner />
       <Suspense fallback={<MainPostsSkeleton />}>
         <MainPosts />

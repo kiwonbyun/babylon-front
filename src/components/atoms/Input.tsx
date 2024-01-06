@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
 
@@ -11,7 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     <input
       {...props}
       ref={ref}
-      className={classNames(
+      className={clsx(
         'border outline-none rounded outline-1 border-gray300 px-4 py-3 focus:border-blue400 placeholder:font-light disabled:bg-gray100',
         props.className,
         {

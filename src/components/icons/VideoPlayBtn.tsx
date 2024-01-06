@@ -1,7 +1,7 @@
 'use client';
-import classNames from 'classnames';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import clsx from 'clsx';
 
 function VideoPlayBtn({ className }: { className?: string }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -28,7 +28,7 @@ function VideoPlayBtn({ className }: { className?: string }) {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className={classNames('w-6 h-6', className)}
+        className={clsx('w-20 h-20', className)}
       >
         <path
           strokeLinecap="round"
