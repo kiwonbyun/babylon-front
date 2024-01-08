@@ -19,4 +19,5 @@ export interface Post {
   lectureDateTime: string;
   lectureLocation: string;
   mentor: Mentor;
+  base64?: string;
 }

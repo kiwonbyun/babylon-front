@@ -1,10 +1,8 @@
-import Button from '@/components/atoms/Button/Button';
 import PartDivider from '@/components/atoms/PartDivider';
 import { MainPostsSkeleton } from '@/components/molecules/skeletons';
 import MainBanner from '@/components/templates/Home/MainBanner';
 import MainParticipation from '@/components/templates/Home/MainParticipation';
 import MainPosts from '@/components/templates/Home/MainPosts';
-import Image from 'next/image';
 import { Suspense } from 'react';
 
 export default async function Home() {
