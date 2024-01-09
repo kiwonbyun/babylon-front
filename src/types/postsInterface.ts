@@ -13,7 +13,7 @@ export interface Post {
   bidPrice: number;
   likeCount: number;
   contents: string;
-  firmLink: null;
+  firmLink: null | string;
   keywords: string;
   auctionEndDateTime: string;
   lectureDateTime: string;
