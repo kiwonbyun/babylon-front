@@ -1,6 +1,6 @@
 import { Mentor } from './mentorsInterface';
 
-export interface Post {
+export type Post = {
   contentsImages: string[];
   thumbnails: string[];
   id: number;
@@ -20,4 +20,4 @@ export interface Post {
   lectureLocation: string;
   mentor: Mentor;
   base64?: string;
-}
+};

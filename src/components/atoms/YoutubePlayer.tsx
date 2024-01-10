@@ -1,12 +1,14 @@
 'use client';
+import clsx from 'clsx';
 import React from 'react';
 import YouTube, { YouTubeProps } from 'react-youtube';
 
 interface YoutubePlayerProps {
   videoId: string | null;
+  className?: string;
 }
 
-function YoutubePlayer({ videoId }: YoutubePlayerProps) {
+function YoutubePlayer({ videoId, className }: YoutubePlayerProps) {
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     // access to player in all event handlers via event.target
     event.target.mute();
@@ -23,12 +25,14 @@ function YoutubePlayer({ videoId }: YoutubePlayerProps) {
   if (!videoId) return null;
 
   return (
-    <YouTube
-      videoId={videoId}
-      opts={opts}
-      onReady={onPlayerReady}
-      style={{ position: 'absolute', width: '100%', height: '100%' }}
-    />
+    <div className={clsx(className, 'relative w-96 aspect-video')}>
+      <YouTube
+        videoId={videoId}
+        opts={opts}
+        onReady={onPlayerReady}
+        style={{ position: 'absolute', width: '100%', height: '100%' }}
+      />
+    </div>
   );
 }
 

@@ -1,12 +1,18 @@
 import { Post } from '@/types/postsInterface';
+import { notFound } from 'next/navigation';
 import { getPlaiceholder } from 'plaiceholder';
 
-export const getPosts = async () => {
-  const res = await fetch(`${process.env.SERVER_URL}/posts`, {
-    next: { revalidate: 60 * 10 },
+export const getPosts = async (query?: string) => {
+  const res = await fetch(`${process.env.SERVER_URL}/posts${query ?? ''}`, {
+    // next: { revalidate: 60 * 10 },
+    cache: 'no-store',
   });
   // await new Promise((resolve) => setTimeout(resolve, 3000));
-  const data = (await res.json()) as Post[];
+  const data: Post[] & { error: string } = await res.json();
+
+  if (data.error) {
+    notFound();
+  }
 
   const base64_data = await Promise.all(
     data.map(async (item) => {
@@ -26,7 +32,11 @@ export const getPostDetail = async ({ id }: { id: string }) => {
     next: { revalidate: 60 * 10 },
   });
   // await new Promise((resolve) => setTimeout(resolve, 3000));
-  const data: Post = await res.json();
+  const data: Post & { error: string } = await res.json();
+
+  if (data?.error) {
+    notFound();
+  }
 
   const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
     return Buffer.from(await res.arrayBuffer());
