@@ -2,7 +2,7 @@ import React from 'react';
 
 interface DividerProps {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Divider = ({ className, children }: DividerProps) => {
