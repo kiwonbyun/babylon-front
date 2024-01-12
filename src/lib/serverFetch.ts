@@ -4,8 +4,8 @@ import { getPlaiceholder } from 'plaiceholder';
 
 export const getPosts = async (query?: string) => {
   const res = await fetch(`${process.env.SERVER_URL}/posts${query ?? ''}`, {
-    // next: { revalidate: 60 * 10 },
-    cache: 'no-store',
+    next: { revalidate: 60 * 10 },
+    // cache: 'no-store',
   });
   // await new Promise((resolve) => setTimeout(resolve, 3000));
   const data: Post[] & { error: string } = await res.json();
@@ -29,9 +29,8 @@ export const getPosts = async (query?: string) => {
 
 export const getPostDetail = async ({ id }: { id: string }) => {
   const res = await fetch(`${process.env.SERVER_URL}/posts/${id}`, {
-    next: { revalidate: 60 * 10 },
+    cache: 'no-store',
   });
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
   const data: Post & { error: string } = await res.json();
 
   if (data?.error) {

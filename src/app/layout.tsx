@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import GlobalProvider from '@/utils/GlobalProvider';
 import clsx from 'clsx';
-
-import 'dayjs/locale/ko';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 import { fontNotoSansKR } from '../lib/fonts';
 

@@ -12,8 +12,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-async function FirmShowingSection({ params }: { params: { id: string } }) {
-  const post = await getPostDetail({ id: params.id });
+async function FirmShowingSection({ id }: { id: string }) {
+  const post = await getPostDetail({ id });
   const firmLinkId = post.firmLink
     ? new URL(post.firmLink).pathname.replaceAll('/', '')
     : null;
@@ -30,6 +30,8 @@ async function FirmShowingSection({ params }: { params: { id: string } }) {
           <span>{createDate}</span>
           <span>|</span>
           <span>{post.mentor.name}</span>
+          <span>|</span>
+          <span>{post.views} views</span>
           <span>|</span>
           <div className="flex items-center gap-1">
             <Heart className="!w-4 !h-4" />

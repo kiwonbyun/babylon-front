@@ -7,6 +7,7 @@ export type Post = {
   createdAt: string;
   updatedAt: string;
   title: string;
+  views: number;
   description: string;
   minPrice: number;
   maxPrice: number;
