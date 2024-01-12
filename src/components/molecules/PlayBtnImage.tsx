@@ -15,7 +15,7 @@ function PlayBtnImage({ alt, className, ...props }: PlayBtnImageProps) {
     >
       <Image {...props} alt={alt} />
       <div className="absolute w-full h-full flex-box opacity-0 hover:opacity-80 transition-opacity">
-        <VideoPlayBtn className="w-24 h-24 text-white stroke-2" />
+        <VideoPlayBtn className="w-20 h-20 text-white stroke-2 md:w-16 md:h-16 sm:w-12 sm:h-12" />
       </div>
     </figure>
   );

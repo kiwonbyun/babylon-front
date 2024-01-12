@@ -1,4 +1,4 @@
-import { fontPoppinsEN } from '@/app/lib/fonts';
+import { fontPoppinsEN } from '@/lib/fonts';
 import { SERVICE_MISSION } from '@/constants/common';
 import clsx from 'clsx';
 import React from 'react';

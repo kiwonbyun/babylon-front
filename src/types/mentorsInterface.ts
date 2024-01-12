@@ -12,4 +12,5 @@ export interface Mentor {
   email: string;
   snsPlatform: string;
   snsLink: string | null;
+  job?: string;
 }

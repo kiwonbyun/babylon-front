@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import clsx from 'clsx';
-import { fontPoppinsEN } from '../lib/fonts';
+import { fontPoppinsEN } from '../../lib/fonts';
 import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
 import Google from '@/components/icons/Google';
 import Kakao from '@/components/icons/Kakao';
 import LoginForm from '@/components/templates/Login/LoginForm';
-import { loginCheck } from '@/app/lib/serverActions';
+import { loginCheck } from '@/lib/serverActions';
 
 const Login = async () => {
   const loginUser = await loginCheck();

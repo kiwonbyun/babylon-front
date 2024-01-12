@@ -1,5 +1,5 @@
 import GridPosts from '@/components/templates/Home/GridPosts';
-import { getPosts } from '../lib/serverFetch';
+import { getPosts } from '../../lib/serverFetch';
 
 async function Posts() {
   const posts = await getPosts();

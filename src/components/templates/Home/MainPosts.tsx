@@ -3,7 +3,7 @@ import PlayBtnImage from '@components/molecules/PlayBtnImage';
 import BidPrice from '../../molecules/BidPrice';
 import { moneyFormatter } from '@/utils/formatter';
 import GridPosts from './GridPosts';
-import { getPosts } from '@/app/lib/serverFetch';
+import { getPosts } from '@/lib/serverFetch';
 import Link from 'next/link';
 
 export default async function MainPosts() {

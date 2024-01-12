@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { SERVICE_MISSION } from '@/constants/common';
 import Button from '@components/atoms/Button/Button';
 import Logo from '@components/atoms/Logo';
-import { loginCheck } from '@/app/lib/serverActions';
+import { loginCheck } from '@/lib/serverActions';
 
 async function Header() {
   const loginUser = await loginCheck();

@@ -1,4 +1,4 @@
-import { fontEmoji, fontPoppinsEN } from '@/app/lib/fonts';
+import { fontEmoji, fontPoppinsEN } from '@/lib/fonts';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';

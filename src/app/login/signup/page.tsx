@@ -1,7 +1,7 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
 import Logo from '@/components/atoms/Logo';
-import { loginCheck } from '@/app/lib/serverActions';
+import { loginCheck } from '@/lib/serverActions';
 import SignupForm from '@/components/templates/Login/SignupForm';
 
 async function SignUp() {

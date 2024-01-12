@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import 'dayjs/locale/ko';
 import dayjs from 'dayjs';
 
-import { fontNotoSansKR } from './lib/fonts';
+import { fontNotoSansKR } from '../lib/fonts';
 
 export const metadata: Metadata = {
   title: {

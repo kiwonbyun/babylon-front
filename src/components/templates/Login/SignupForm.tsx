@@ -8,7 +8,7 @@ import { SignupFormInputType, signupSchema } from '@/types/formSchema';
 
 import { RolesEnum } from '@/types/authInterface';
 import { useCreateUser } from '@/hooks/Auth/Mutate/useCreateUser';
-import { saveTokenServerAction } from '@/app/lib/serverActions';
+import { saveTokenServerAction } from '@/lib/serverActions';
 import { CustomError } from '@/types/commonInterface';
 import { EMAIL_REGEX } from '@/constants/common';
 import { useCreateVerifyCode } from '@/hooks/Auth/Mutate/useCreateVerifyCode';
