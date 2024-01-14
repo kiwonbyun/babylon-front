@@ -1,21 +1,30 @@
 import React, { forwardRef } from 'react';
 import Input from '@components/atoms/Input';
 import Exclamation from '../icons/Exclamation';
+import clsx from 'clsx';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   desc?: string;
   error?: string[] | string;
+  horizontal?: boolean;
 }
 
 const LabeledInput = forwardRef<HTMLInputElement, InputProps>(
-  function LabeledInput(props, ref) {
+  function LabeledInput({ horizontal = false, ...props }, ref) {
     return (
-      <div className="flex flex-col items-start gap-1">
+      <div
+        className={clsx('flex items-start gap-1', {
+          'flex-col': !horizontal,
+          'items-center': horizontal,
+        })}
+      >
         <div>
           <label
             htmlFor={props.id}
-            className="text-sm font-medium flex items-center gap-2"
+            className={clsx('text-sm font-medium flex items-center gap-2', {
+              'w-24': horizontal,
+            })}
           >
             {props.label}
             {props?.error && (

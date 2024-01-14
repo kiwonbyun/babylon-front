@@ -4,11 +4,11 @@ import { login, signup } from '@/api/auth';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { jwtDecode } from 'jwt-decode';
-import { RolesEnum } from '@/types/authInterface';
+import { RolesEnum, User } from '@/types/authInterface';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
-  const decoded = jwtDecode(jwt);
+  const decoded: User = jwtDecode(jwt);
   return decoded;
 }
 

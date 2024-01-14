@@ -9,3 +9,11 @@ export type SignupDataType = {
   password: string;
   role: RolesEnum;
 };
+
+export type User = {
+  email: string;
+  sub: number;
+  type: string;
+  iat: number;
+  exp: number;
+};
