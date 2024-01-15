@@ -1,3 +1,4 @@
+import Divider from '@/components/atoms/Divider';
 import Input from '@/components/atoms/Input';
 import LabeledBox from '@/components/molecules/LabeledBox';
 import LabeledInput from '@/components/molecules/LabeledInput';
@@ -76,10 +77,14 @@ async function BidPage({ params }: { params: { id: string } }) {
             </div>
           </div>
         </LabeledBox>
+        <LabeledBox label="결제수단" className="my-6">
+          <div className="flex flex-col gap-1"></div>
+        </LabeledBox>
       </section>
-      <section className="w-1/3">
+      <section className="w-1/3 mt-10">
         <div className="border border-solid border-gray200 rounded h-96 p-4">
           <h2 className="text-xl">결제금액</h2>
+          <Divider className="my-2" />
         </div>
       </section>
     </main>

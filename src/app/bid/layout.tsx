@@ -1,6 +1,6 @@
-import Footer from '@/components/templates/Footer';
-import Header from '@/components/templates/Header';
 import React from 'react';
+import Header from '@/components/templates/Header';
+// import Footer from '@/components/templates/Footer';
 
 interface BidLayoutProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ const BidLayout = ({ children }: BidLayoutProps) => {
     <main>
       <Header />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 };
