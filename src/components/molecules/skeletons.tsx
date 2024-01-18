@@ -32,7 +32,7 @@ function RestPosts() {
       {Array.from({ length: 8 }).map((_, i) => (
         <div className="flex flex-col gap-1" key={i}>
           <SkeletonLine className="w-full aspect-video" />
-          <SkeletonLine className="h-7 w-[80%]" />
+          <SkeletonLine className="h-6 w-[80%]" />
           <SkeletonLine className="h-4 w-[80px]" />
         </div>
       ))}

@@ -8,6 +8,7 @@ import Google from '@/components/icons/Google';
 import Kakao from '@/components/icons/Kakao';
 import LoginForm from '@/components/templates/Login/LoginForm';
 import { loginCheck } from '@/lib/serverActions';
+import SnsLoginButton from '@/components/atoms/SnsLoginButton';
 
 const Login = async () => {
   const loginUser = await loginCheck();
@@ -24,43 +25,19 @@ const Login = async () => {
       <Divider className="mx-4">or</Divider>
       <div className="flex-col-box gap-4 h-1/3">
         <SnsLoginButton
+          href=""
           icon={<Kakao />}
           text="Continue with Kakao"
           className="bg-[#FEE500]"
         />
         <SnsLoginButton
+          href="http://localhost:8000/auth/google"
           icon={<Google />}
           text="Continue with Google"
           className="bg-[#4285F4]"
         />
       </div>
     </section>
-  );
-};
-
-const SnsLoginButton = ({
-  icon,
-  text,
-  className,
-}: {
-  icon: ReactNode;
-  text: string;
-  className?: string;
-}) => {
-  return (
-    <div className="bg-gray100 w-60 flex rounded cursor-pointer">
-      <div className={clsx('rounded-l h-10 w-12 flex-box', className)}>
-        {icon}
-      </div>
-      <h3
-        className={clsx(
-          'flex items-center justify-center w-full text-slate800 font-medium',
-          fontPoppinsEN.className
-        )}
-      >
-        {text}
-      </h3>
-    </div>
   );
 };
 
