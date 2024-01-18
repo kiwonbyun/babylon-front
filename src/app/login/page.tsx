@@ -1,21 +1,13 @@
-import React, { ReactNode } from 'react';
-import { redirect } from 'next/navigation';
+import React from 'react';
 import clsx from 'clsx';
-import { fontPoppinsEN } from '../../lib/fonts';
 import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
 import Google from '@/components/icons/Google';
 import Kakao from '@/components/icons/Kakao';
 import LoginForm from '@/components/templates/Login/LoginForm';
-import { loginCheck } from '@/lib/serverActions';
 import SnsLoginButton from '@/components/atoms/SnsLoginButton';
 
-const Login = async () => {
-  const loginUser = await loginCheck();
-
-  if (loginUser) {
-    redirect('/');
-  }
+const Login = () => {
   return (
     <section className={clsx('h-full')}>
       <div className="h-1/2 flex-col-box gap-6">

@@ -1,15 +1,8 @@
 import React from 'react';
-import { redirect } from 'next/navigation';
 import Logo from '@/components/atoms/Logo';
-import { loginCheck } from '@/lib/serverActions';
 import SignupForm from '@/components/templates/Login/SignupForm';
 
-async function SignUp() {
-  const loginUser = await loginCheck();
-
-  if (loginUser) {
-    redirect('/');
-  }
+function SignUp() {
   return (
     <section className="h-full">
       <div className="flex-col-box gap-6 h-full relative bottom-20">

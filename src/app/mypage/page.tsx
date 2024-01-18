@@ -1,6 +1,9 @@
+import { loginCheck } from '@/lib/serverActions';
 import React from 'react';
 
-function MyPage() {
+async function MyPage() {
+  const user = await loginCheck();
+
   return <div>asd</div>;
 }
 
