@@ -16,3 +16,8 @@ export interface Banner {
   id: number;
   blurHash?: string;
 }
+
+export const enum EnumTheme {
+  BLACK = 'black',
+  WHITE = 'white',
+}

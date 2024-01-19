@@ -5,19 +5,40 @@ import { SERVICE_MISSION } from '@/constants/common';
 import Button from '@components/atoms/Button/Button';
 import Logo from '@components/atoms/Logo';
 import { loginCheck } from '@/lib/serverActions';
+import { EnumTheme } from '@/types/commonInterface';
+import clsx from 'clsx';
 
-async function Header() {
+async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
   const loginUser = await loginCheck();
+  const darkTheme = theme === EnumTheme.BLACK;
 
   return (
-    <header className="w-full bg-white h-16 flex justify-between items-center px-6 shadow-md">
+    <header
+      className={clsx(
+        'w-full h-16 flex justify-between items-center px-6 shadow-md',
+        {
+          'bg-white': !darkTheme,
+          'bg-black': darkTheme,
+        }
+      )}
+    >
       <ul className="flex-box gap-3">
-        <Logo />
-        <small className="text-gray400 text-xs sm:hidden">
+        <Logo theme={theme} />
+        <small
+          className={clsx('text-gray400 text-xs sm:hidden', {
+            'text-gray400': darkTheme,
+            'text-white': !darkTheme,
+          })}
+        >
           {SERVICE_MISSION}
         </small>
       </ul>
-      <ul className="flex-box gap-4 text-sm text-gray700">
+      <ul
+        className={clsx('flex-box gap-4 text-sm', {
+          'text-white': darkTheme,
+          'text-gray900': !darkTheme,
+        })}
+      >
         <Link href={'/posts'}>게시물</Link>
         {loginUser ? (
           <Link href={'/mypage'}>

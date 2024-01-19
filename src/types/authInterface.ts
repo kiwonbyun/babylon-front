@@ -16,4 +16,6 @@ export type User = {
   type: string;
   iat: number;
   exp: number;
+  nickname: string;
+  profileImage: string | null;
 };
