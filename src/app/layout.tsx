@@ -34,6 +34,7 @@ export default function RootLayout({
             position="top-right"
             richColors
             toastOptions={{ duration: 3000 }}
+            visibleToasts={1}
           />
           {children}
         </GlobalProvider>

@@ -1,23 +1,19 @@
 import Divider from '@/components/atoms/Divider';
-import Input from '@/components/atoms/Input';
 import LabeledBox from '@/components/molecules/LabeledBox';
 import LabeledInput from '@/components/molecules/LabeledInput';
 import { loginCheck } from '@/lib/serverActions';
 import { getPostDetail } from '@/lib/serverFetch';
-import { User } from '@/types/authInterface';
 import { moneyFormatter } from '@/utils/formatter';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
 import React from 'react';
 
 async function BidPage({ params }: { params: { id: string } }) {
   const user = await loginCheck();
-  console.log(user);
   const post = await getPostDetail({ id: params.id });
 
   if (!user) {
-    redirect('/login');
+    return null;
   }
 
   return (

@@ -1,8 +1,8 @@
+import ToastRedirecter from '@/components/atoms/ToastRedirecter';
 import Footer from '@/components/templates/Footer';
 import Header from '@/components/templates/Header';
 import { loginCheck } from '@/lib/serverActions';
 import { EnumTheme } from '@/types/commonInterface';
-import { redirect } from 'next/navigation';
 import React from 'react';
 
 interface MypageLayoutProps {
@@ -13,7 +13,13 @@ const MypageLayout = async ({ children }: MypageLayoutProps) => {
   const user = await loginCheck();
 
   if (!user) {
-    redirect('/');
+    return (
+      <ToastRedirecter
+        message="로그인이 필요합니다"
+        type="error"
+        redirectPath="/"
+      />
+    );
   }
 
   return (
