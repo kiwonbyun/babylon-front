@@ -11,7 +11,7 @@ async function MyPage() {
   return (
     <main className="h-screen">
       <section className="bg-slate900 text-white flex items-center gap-4 justify-center py-10">
-        <div className="w-40 h-40 relative sm:w-24 sm:h-24">
+        <div className="w-32 h-32 relative sm:w-24 sm:h-24">
           <Image
             alt="profile-image"
             src={getDefaultImagePath(user?.profileImage)}
@@ -26,7 +26,7 @@ async function MyPage() {
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-medium">{user?.nickname}</h1>
           <Link href={'/mypage/edit'}>
-            <Button className="w-fit text-black ">프로필 수정</Button>
+            <Button className="w-fit text-black !py-1">프로필 수정</Button>
           </Link>
         </div>
       </section>

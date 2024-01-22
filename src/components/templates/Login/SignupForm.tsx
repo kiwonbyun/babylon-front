@@ -18,7 +18,7 @@ import { toast } from 'sonner';
 function SignupForm() {
   const [isVerified, setIsVerified] = useState(false);
   const [showVerifyCode, setShowVerifyCode] = useState(false);
-  const { mutateAsync: sendCode, isLoading } = useCreateVerifyCode();
+  const { mutateAsync: sendCode } = useCreateVerifyCode();
   const { mutateAsync: confirmCode } = useConfirmVerifyCode();
   const { mutateAsync: createUser } = useCreateUser();
   const {

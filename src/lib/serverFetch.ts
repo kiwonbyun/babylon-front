@@ -1,4 +1,5 @@
 import { Post } from '@/types/postsInterface';
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { getPlaiceholder } from 'plaiceholder';
 
@@ -43,5 +44,19 @@ export const getPostDetail = async ({ id }: { id: string }) => {
   const { base64 } = await getPlaiceholder(buffer);
   data.base64 = base64;
 
+  return data;
+};
+
+const accessToken = () => cookies().get('accessToken')?.value;
+
+export const getUser = async ({ id }: { id: number }) => {
+  const res = await fetch(`${process.env.SERVER_URL}/users/${id}`, {
+    cache: 'no-store',
+    headers: {
+      Authorization: `Bearer ${accessToken()}`,
+    },
+  });
+  console.log(res);
+  const data = await res.json();
   return data;
 };
