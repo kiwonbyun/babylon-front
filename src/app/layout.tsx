@@ -4,6 +4,7 @@ import GlobalProvider from '@/utils/GlobalProvider';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { Toaster } from 'sonner';
 
 import { fontNotoSansKR } from '../lib/fonts';
 
@@ -28,7 +29,14 @@ export default function RootLayout({
       <body
         className={clsx(fontNotoSansKR.className, 'antialiased scrollbar-hide')}
       >
-        <GlobalProvider>{children}</GlobalProvider>
+        <GlobalProvider>
+          <Toaster
+            position="top-right"
+            richColors
+            toastOptions={{ duration: 3000 }}
+          />
+          {children}
+        </GlobalProvider>
       </body>
     </html>
   );

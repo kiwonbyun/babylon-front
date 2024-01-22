@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../atoms/Button/Button';
 import { useCreateErrorReport } from '@/hooks/Common/Mutate/useCreateErrorReport';
-import { useToast } from '@/hooks/Custom/Toast/ToastProvider';
 import { zodResolver } from '@hookform/resolvers/zod';
 import LabeledInput from '../molecules/LabeledInput';
 import LabeledTextArea from '../molecules/LabeledTextArea';
@@ -10,6 +9,7 @@ import {
   ErrorReportFormInputType,
   errorReportSchema,
 } from '@/types/formSchema';
+import { toast } from 'sonner';
 
 interface IReportFromProps {
   closeForm: () => void;
@@ -22,7 +22,6 @@ function ReportForm({ closeForm }: IReportFromProps) {
     });
   const { errors } = formState;
   const { mutateAsync } = useCreateErrorReport();
-  const { addToast } = useToast();
 
   const onSubmit = handleSubmit((data) => {
     console.log(data.name);
@@ -32,7 +31,7 @@ function ReportForm({ closeForm }: IReportFromProps) {
       email: data.email,
       content: data.content,
     }).then(() => {
-      addToast.success(
+      toast.success(
         <div className="flex-col-box">
           <p>오류 제보가 완료되었습니다!</p>
           <p>빠른 시일 내에 수정하겠습니다.</p>

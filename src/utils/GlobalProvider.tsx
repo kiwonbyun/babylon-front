@@ -1,5 +1,4 @@
 'use client';
-import ToastProvider from '@/hooks/Custom/Toast/ToastProvider';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
@@ -22,9 +21,7 @@ function GlobalProvider({ children }: Props) {
   );
   return (
     <QueryClientProvider client={client}>
-      <ReactQueryStreamedHydration>
-        <ToastProvider>{children}</ToastProvider>
-      </ReactQueryStreamedHydration>
+      <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

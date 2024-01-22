@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import LabeledInput from '@components/molecules/LabeledInput';
 import Button from '@components/atoms/Button/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -13,11 +13,12 @@ import { CustomError } from '@/types/commonInterface';
 import { EMAIL_REGEX } from '@/constants/common';
 import { useCreateVerifyCode } from '@/hooks/Auth/Mutate/useCreateVerifyCode';
 import { useConfirmVerifyCode } from '@/hooks/Auth/Mutate/useConfirmVerifyCode';
+import { toast } from 'sonner';
 
 function SignupForm() {
   const [isVerified, setIsVerified] = useState(false);
   const [showVerifyCode, setShowVerifyCode] = useState(false);
-  const { mutate: sendCode } = useCreateVerifyCode();
+  const { mutateAsync: sendCode, isLoading } = useCreateVerifyCode();
   const { mutateAsync: confirmCode } = useConfirmVerifyCode();
   const { mutateAsync: createUser } = useCreateUser();
   const {
@@ -37,22 +38,44 @@ function SignupForm() {
       role: RolesEnum.USER,
     };
     createUser(payload)
-      .then((res) => saveTokenServerAction(res.accessToken, res.refreshToken))
-      .catch((err: CustomError) => console.log(err.response?.data.message));
+      .then((res) => {
+        saveTokenServerAction(res.accessToken, res.refreshToken);
+        toast.success('회원가입이 완료되었습니다.');
+      })
+      .catch((err: CustomError) => toast.error(err.response?.data.message));
   };
   const email = watch('email');
   const code = watch('code');
   const isEmail = EMAIL_REGEX.test(email);
 
   const handleSendVerify = () => {
-    setShowVerifyCode(true);
-    sendCode(email);
+    toast.promise(sendCode(email), {
+      loading: '인증코드 전송중...',
+      success: () => {
+        setShowVerifyCode(true);
+        return '인증코드가 전송되었습니다.';
+      },
+      error: (err) => err.response?.data.message,
+    });
   };
   const handleConfirmVerify = () => {
-    confirmCode({ email, code }).then((res) => {
-      console.log(res);
-      if (res.message === 'success') setIsVerified(true);
+    toast.promise(confirmCode({ email, code }), {
+      success: () => {
+        setIsVerified(true);
+        return '인증코드가 확인되었습니다.';
+      },
+      error: (err) => err.response?.data.message,
     });
+  };
+
+  const handleEnterEmailVerify = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== 'Enter') return;
+    handleSendVerify();
+  };
+
+  const handleEnterCodeVerify = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== 'Enter') return;
+    handleConfirmVerify();
   };
 
   return (
@@ -68,6 +91,7 @@ function SignupForm() {
           {...register('email')}
           error={errors?.email?.message}
           disabled={showVerifyCode || isVerified}
+          onKeyUp={handleEnterEmailVerify}
         />
         {showVerifyCode && (
           <LabeledInput
@@ -76,12 +100,14 @@ function SignupForm() {
             desc="이메일로 전송된 인증코드를 입력해주세요"
             {...register('code')}
             disabled={isVerified}
+            onKeyUp={handleEnterCodeVerify}
           />
         )}
         {showVerifyCode ? (
           <Button
-            className="bg-pink500 w-80 text-white"
+            className="bg-pink500 w-80 text-white disabled:bg-pink200 disabled:text-black"
             onClick={handleConfirmVerify}
+            disabled={isVerified}
           >
             인증코드 확인
           </Button>
