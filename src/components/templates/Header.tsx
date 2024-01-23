@@ -1,15 +1,19 @@
 import Link from 'next/link';
 import React from 'react';
-import Image from 'next/image';
 import { SERVICE_MISSION } from '@/constants/common';
 import Button from '@components/atoms/Button/Button';
 import Logo from '@components/atoms/Logo';
 import { loginCheck } from '@/lib/serverActions';
 import { EnumTheme } from '@/types/commonInterface';
 import clsx from 'clsx';
+import { getUser } from '@/lib/serverFetch';
+import ImageCircle from '../atoms/ImageCircle';
 
 async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
-  const loginUser = await loginCheck();
+  const token = await loginCheck();
+  if (!token) return null;
+  const user = await getUser({ id: token.sub });
+
   const darkTheme = theme === EnumTheme.BLACK;
 
   return (
@@ -40,13 +44,12 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
         })}
       >
         <Link href={'/posts'}>게시물</Link>
-        {loginUser ? (
+        {token ? (
           <Link href={'/mypage'}>
-            <Image
-              src="/default-profile.webp"
-              alt="image"
-              width={38}
-              height={38}
+            <ImageCircle
+              alt="login-user-profile"
+              src={user.profileImage}
+              className="!w-10 !h-10"
             />
           </Link>
         ) : (

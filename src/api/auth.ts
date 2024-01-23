@@ -42,19 +42,3 @@ export const updateUser = ({
     })
     .then((res) => res.data);
 };
-
-export const deleteProfileImage = ({
-  id,
-  accessToken,
-}: {
-  id: number;
-  accessToken: string;
-}) => {
-  return client.delete(`/users/profile-image/${id}`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-};
-
-export const getUser = (id: number) => {
-  return client.get(`/users/${id}`).then((res) => res.data);
-};

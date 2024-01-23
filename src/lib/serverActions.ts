@@ -1,10 +1,12 @@
 'use server';
 
-import { login, signup } from '@/api/auth';
+import { login, signup, updateUser } from '@/api/auth';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { jwtDecode } from 'jwt-decode';
 import { RolesEnum, User } from '@/types/authInterface';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
@@ -144,4 +146,18 @@ export const saveTokenServerAction = async (
   }
 
   return { message: 'success' };
+};
+
+export const updateUserSA = async (id: number, data: FormData) => {
+  try {
+    await updateUser({
+      id,
+      data,
+      accessToken: cookies().get('accessToken')?.value ?? '',
+    });
+  } catch (err: any) {
+    throw new Error('프로필 수정 실패했습니다. 잠시후 다시 시도해주세요');
+  }
+  revalidatePath('/mypage');
+  redirect('/mypage');
 };

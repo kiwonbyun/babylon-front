@@ -1,28 +1,19 @@
 import Button from '@/components/atoms/Button/Button';
+import ImageCircle from '@/components/atoms/ImageCircle';
 import { loginCheck } from '@/lib/serverActions';
-import { getDefaultImagePath } from '@/utils/formatter';
-import Image from 'next/image';
+import { getUser } from '@/lib/serverFetch';
 import Link from 'next/link';
 import React from 'react';
 
 async function MyPage() {
-  const user = await loginCheck();
+  const token = await loginCheck();
+  if (!token) return null;
+  const user = await getUser({ id: token?.sub });
 
   return (
     <main className="h-screen">
       <section className="bg-slate900 text-white flex items-center gap-4 justify-center py-10">
-        <div className="w-32 h-32 relative sm:w-24 sm:h-24">
-          <Image
-            alt="profile-image"
-            src={getDefaultImagePath(user?.profileImage)}
-            fill
-            style={{
-              borderRadius: '50%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-            }}
-          />
-        </div>
+        <ImageCircle alt="profile-image" src={user?.profileImage} />
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-medium">{user?.nickname}</h1>
           <Link href={'/mypage/edit'}>

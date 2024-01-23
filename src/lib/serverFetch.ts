@@ -1,3 +1,4 @@
+import { LoginUser } from '@/types/authInterface';
 import { Post } from '@/types/postsInterface';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -56,7 +57,6 @@ export const getUser = async ({ id }: { id: number }) => {
       Authorization: `Bearer ${accessToken()}`,
     },
   });
-  console.log(res);
-  const data = await res.json();
+  const data: LoginUser = await res.json();
   return data;
 };

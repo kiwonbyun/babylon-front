@@ -19,3 +19,10 @@ export type User = {
   nickname: string;
   profileImage: string | null;
 };
+export type LoginUser = {
+  id: number;
+  email: string;
+  nickname: string;
+  role: string;
+  profileImage: string;
+};

@@ -1,6 +1,7 @@
+import clsx from 'clsx';
 import React from 'react';
 
-function Xmark() {
+function Xmark({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +9,7 @@ function Xmark() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-5 h-5"
+      className={clsx('w-5 h-5', className)}
     >
       <path
         strokeLinecap="round"

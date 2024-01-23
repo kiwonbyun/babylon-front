@@ -24,7 +24,6 @@ function ReportForm({ closeForm }: IReportFromProps) {
   const { mutateAsync } = useCreateErrorReport();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data.name);
     if (!data.name || !data.email || !data.content) return;
     mutateAsync({
       name: data.name,
