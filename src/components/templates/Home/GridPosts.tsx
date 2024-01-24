@@ -5,7 +5,7 @@ import React from 'react';
 
 function GridPosts({ items }: { items: Post[] }) {
   return (
-    <ul className="grid grid-cols-3 gap-4">
+    <ul className="grid grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2">
       {items.map((post) => (
         <li key={post.id} className="w-full">
           <Link href={`posts/${post.id}`}>
@@ -20,7 +20,7 @@ function GridPosts({ items }: { items: Post[] }) {
             />
 
             <div>
-              <h3 className="font-bold text-lg text-black break-keep">
+              <h3 className="font-bold text-lg text-black break-keep sm:text-base">
                 {post.title}
               </h3>
               <span className="text-xs text-gray900 font-light">

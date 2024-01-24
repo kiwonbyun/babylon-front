@@ -5,14 +5,14 @@ import React from 'react';
 
 function MainParticipation() {
   return (
-    <div className="w-[90%] mx-auto my-12 grid grid-cols-2 gap-6">
-      <div className="flex flex-col items-start justify-center gap-5">
+    <div className="w-[90%] mx-auto my-12 flex gap-6 sm:flex-col">
+      <div className="flex flex-col items-start justify-center gap-5 flex-1">
         <Link href={'/participation'}>
           <h1 className="text-3xl font-bold line-clamp-1 hover:text-gray600">
             당신의 통찰을 나눠주세요!
           </h1>
         </Link>
-        <p className="break-keep w-5/6 leading-6 text-gray900">
+        <p className="break-keep w-5/6 leading-6 text-gray900 sm:line-clamp-3 md:line-clamp-3 sm:w-full md:w-full">
           누구든 자신만의 통찰을 나눌 수 있습니다. 당신의 통찰이 누군가에게 큰
           도움이 될 수 있습니다. 어떤 분야에서든 남에게 도움이 될 만한 지식을
           가진 우리 모두는 좋은 선생님이 될 수 있습니다. 여러분이 만나는 다양한
@@ -28,7 +28,7 @@ function MainParticipation() {
       </div>
       <Link
         href={'/participation'}
-        className="relative border border-solid aspect-[10/6]"
+        className="relative border border-solid aspect-[10/6] flex-1"
       >
         <Image
           alt="participant-banner"

@@ -31,7 +31,7 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
         <small
           className={clsx('text-gray400 text-xs sm:hidden', {
             'text-gray400': darkTheme,
-            'text-white': !darkTheme,
+            'text-gray800': !darkTheme,
           })}
         >
           {SERVICE_MISSION}

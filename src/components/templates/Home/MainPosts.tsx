@@ -5,6 +5,8 @@ import { moneyFormatter } from '@/utils/formatter';
 import GridPosts from './GridPosts';
 import { getPosts } from '@/lib/serverFetch';
 import Link from 'next/link';
+import { fontPoppinsEN } from '@/lib/fonts';
+import clsx from 'clsx';
 
 export default async function MainPosts() {
   const posts = await getPosts();
@@ -17,11 +19,14 @@ export default async function MainPosts() {
 
   return (
     <div className="w-[90%] mx-auto my-12">
+      <h1 className={clsx('font-semibold text-lg', fontPoppinsEN.className)}>
+        Meetings
+      </h1>
       <Link
-        className="grid grid-cols-2 gap-4 mb-12"
+        className="grid grid-cols-2 gap-4 sm:gap-1 mb-12 sm:grid-cols-1"
         href={`posts/${firstPost.id}`}
       >
-        <article className="flex flex-col justify-center items-start gap-5">
+        <article className="flex flex-col justify-center items-start gap-5 sm:gap-1">
           <h1 className="text-3xl font-bold line-clamp-1 hover:text-gray600">
             {firstPost.title}
           </h1>
@@ -29,12 +34,12 @@ export default async function MainPosts() {
             {firstPost.mentor.name}
           </span>
           {firstPost.description && (
-            <p className="break-keep max-w-[80%] leading-6 text-gray900 line-clamp-4">
+            <p className="break-keep max-w-[80%] leading-6 text-gray900 line-clamp-4 sm:hidden">
               {firstPost.description}
             </p>
           )}
 
-          <div className="flex items-center justify-between w-[80%]">
+          <div className="flex items-center justify-between w-[80%] sm:hidden md:hidden">
             <BidPrice
               price={moneyFormatter(firstPost.minPrice) + '+'}
               label="최소 입찰가"

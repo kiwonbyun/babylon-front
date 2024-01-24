@@ -54,7 +54,6 @@ function EditForm({ user }: { user: LoginUser }) {
     });
   };
 
-  console.log(pending);
   return (
     <form action={updateUser} className="flex flex-col gap-5 items-center">
       <label className="relative cursor-pointer flex flex-col w-fit">
