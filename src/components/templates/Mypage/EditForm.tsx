@@ -10,16 +10,18 @@ import { updateUserSA } from '@/lib/serverActions';
 import Xmark from '@/components/icons/Xmark';
 import { toast } from 'sonner';
 import ImageCircle from '@/components/atoms/ImageCircle';
+import Loading from '@/components/atoms/Loading';
 
 type ClientImageType = string | null | File;
 
 function EditForm({ user }: { user: LoginUser }) {
-  const [clientImage, setClientImamge] = useState<ClientImageType>(
+  const [clientImage, setClientImage] = useState<ClientImageType>(
     user.profileImage
   );
+  const updateUserSAWithId = updateUserSA.bind(null, user.id);
   const [pending, startTransition] = useTransition();
 
-  const getImageSrc = (image: ClientImageType) => {
+  const getPreviewImageSrc = (image: ClientImageType) => {
     if (image === null) {
       return getDefaultImagePath(null);
     }
@@ -32,39 +34,33 @@ function EditForm({ user }: { user: LoginUser }) {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     const file = e.target.files[0];
-    setClientImamge(file);
+    setClientImage(file);
   };
 
   const handleDeleteProfile = () => {
-    setClientImamge(null);
+    setClientImage(null);
   };
 
-  const updateUserWithId = (formdata: any) => {
+  const updateUser = (formdata: any) => {
     formdata.append('profileImage', clientImage ?? '');
-    startTransition(() =>
-      updateUserSA
-        .bind(
-          null,
-          user.id
-        )(formdata)
+    startTransition(() => {
+      updateUserSAWithId(formdata)
         .then(() => {
           toast.success('프로필이 수정되었습니다.');
         })
         .catch(() => {
           toast.error('프로필 수정에 실패했습니다.');
-        })
-    );
+        });
+    });
   };
 
+  console.log(pending);
   return (
-    <form
-      action={updateUserWithId}
-      className="flex flex-col gap-5 items-center"
-    >
+    <form action={updateUser} className="flex flex-col gap-5 items-center">
       <label className="relative cursor-pointer flex flex-col w-fit">
         <ImageCircle
           alt="profile-image"
-          src={getImageSrc(clientImage)}
+          src={getPreviewImageSrc(clientImage)}
           className="!w-28 !h-28"
         />
         <div className="w-fit rounded-full p-1 bg-gray200 absolute top-[85px] left-[76px] border-2 border-white border-solid">
@@ -98,11 +94,17 @@ function EditForm({ user }: { user: LoginUser }) {
         className="w-72"
       />
       <div className="flex gap-2">
-        <Button className="bg-red600 text-white w-20" type="submit">
-          저장
+        <Button
+          disabled={pending}
+          className="!bg-black text-white w-20 flex justify-center items-center"
+          type="submit"
+        >
+          {pending ? <Loading className="stroke-white" /> : '저장'}
         </Button>
         <Link href={'/mypage'}>
-          <Button className="!bg-black text-white w-20">취소</Button>
+          <Button className="!bg-white text-black w-20 border border-black border-solid">
+            취소
+          </Button>
         </Link>
       </div>
     </form>

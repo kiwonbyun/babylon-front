@@ -10,7 +10,7 @@ export type SignupDataType = {
   role: RolesEnum;
 };
 
-export type User = {
+export type TokenUser = {
   email: string;
   sub: number;
   type: string;

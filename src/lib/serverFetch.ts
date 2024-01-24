@@ -50,7 +50,8 @@ export const getPostDetail = async ({ id }: { id: string }) => {
 
 const accessToken = () => cookies().get('accessToken')?.value;
 
-export const getUser = async ({ id }: { id: number }) => {
+export const getUser = async ({ id }: { id?: number }) => {
+  if (!id) return null;
   const res = await fetch(`${process.env.SERVER_URL}/users/${id}`, {
     cache: 'no-store',
     headers: {

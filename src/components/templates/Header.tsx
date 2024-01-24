@@ -11,8 +11,8 @@ import ImageCircle from '../atoms/ImageCircle';
 
 async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
   const token = await loginCheck();
-  if (!token) return null;
-  const user = await getUser({ id: token.sub });
+
+  const user = await getUser({ id: token?.sub });
 
   const darkTheme = theme === EnumTheme.BLACK;
 
@@ -44,7 +44,7 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
         })}
       >
         <Link href={'/posts'}>게시물</Link>
-        {token ? (
+        {user ? (
           <Link href={'/mypage'}>
             <ImageCircle
               alt="login-user-profile"

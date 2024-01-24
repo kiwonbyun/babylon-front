@@ -4,13 +4,13 @@ import { login, signup, updateUser } from '@/api/auth';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { jwtDecode } from 'jwt-decode';
-import { RolesEnum, User } from '@/types/authInterface';
+import { RolesEnum, TokenUser } from '@/types/authInterface';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
-  const decoded: User = jwtDecode(jwt);
+  const decoded: TokenUser = jwtDecode(jwt);
   return decoded;
 }
 

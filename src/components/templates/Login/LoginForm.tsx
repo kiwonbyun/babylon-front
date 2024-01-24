@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { loginServerAction } from '@/lib/serverActions';
 import LabeledInput from '@components/molecules/LabeledInput';
