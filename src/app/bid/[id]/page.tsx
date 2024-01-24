@@ -1,6 +1,8 @@
+import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
 import LabeledBox from '@/components/molecules/LabeledBox';
 import LabeledInput from '@/components/molecules/LabeledInput';
+import PayButton from '@/components/molecules/PayButton';
 import { loginCheck } from '@/lib/serverActions';
 import { getPostDetail } from '@/lib/serverFetch';
 import { moneyFormatter } from '@/utils/formatter';
@@ -81,6 +83,7 @@ async function BidPage({ params }: { params: { id: string } }) {
         <div className="border border-solid border-gray200 rounded h-96 p-4">
           <h2 className="text-xl">결제금액</h2>
           <Divider className="my-2" />
+          <PayButton />
         </div>
       </section>
     </main>

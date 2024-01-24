@@ -7,6 +7,7 @@ import 'dayjs/locale/ko';
 import { Toaster } from 'sonner';
 
 import { fontNotoSansKR } from '../lib/fonts';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +32,7 @@ export default function RootLayout({
       >
         <GlobalProvider>
           <Toaster
-            position="top-right"
+            position="top-center"
             richColors
             toastOptions={{ duration: 3000 }}
             visibleToasts={1}
@@ -39,6 +40,7 @@ export default function RootLayout({
           {children}
         </GlobalProvider>
       </body>
+      <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
     </html>
   );
 }

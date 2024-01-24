@@ -27,7 +27,8 @@
       "@hooks/*": ["hooks/*"],
       "@types/*": ["types/*"],
       "@constants/*": ["constants/*"]
-    }
+    },
+    "types": ["iamport-typings"]
   },
   "include": [
     "next-env.d.ts",
