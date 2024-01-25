@@ -148,15 +148,19 @@ export const saveTokenServerAction = async (
   return { message: 'success' };
 };
 
+const getAccessToken = () => {
+  return cookies().get('accessToken')?.value ?? '';
+};
+
 export const updateUserSA = async (id: number, data: FormData) => {
   try {
     await updateUser({
       id,
       data,
-      accessToken: cookies().get('accessToken')?.value ?? '',
+      accessToken: getAccessToken(),
     });
   } catch (err: any) {
-    throw new Error('프로필 수정 실패했습니다. 잠시후 다시 시도해주세요');
+    throw new Error(err.response.data.message ?? '서버 오류가 발생했습니다.');
   }
   revalidatePath('/mypage');
   redirect('/mypage');
