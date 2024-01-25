@@ -14,7 +14,7 @@ function LoginForm() {
   return (
     <form className="flex-col-box gap-2" action={dispatch}>
       <LabeledInput
-        className="w-80"
+        className="w-80 sm:w-72"
         label="이메일"
         id="email"
         name="email"
@@ -22,7 +22,7 @@ function LoginForm() {
       />
 
       <LabeledInput
-        className="w-80"
+        className="w-80 sm:w-72"
         label="비밀번호"
         type="password"
         id="password"
@@ -40,12 +40,12 @@ function LoginForm() {
       <div className="flex-col-box gap-2 mt-3">
         <Button
           type="submit"
-          className="text-white w-80 disabled:bg-gray200 bg-red600"
+          className="text-white w-80 sm:w-72 disabled:bg-gray200 bg-red600"
         >
           로그인
         </Button>
         <Link href={'/login/signup'}>
-          <Button className="w-80 bg-gray100">회원가입</Button>
+          <Button className="w-80 sm:w-72 bg-gray100">회원가입</Button>
         </Link>
       </div>
     </form>

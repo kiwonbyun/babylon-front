@@ -27,7 +27,7 @@ export default async function MainPosts() {
         href={`posts/${firstPost.id}`}
       >
         <article className="flex flex-col justify-center items-start gap-5 sm:gap-1">
-          <h1 className="text-3xl font-bold line-clamp-1 hover:text-gray600">
+          <h1 className="text-3xl sm:text-xl font-bold line-clamp-1 hover:text-gray600">
             {firstPost.title}
           </h1>
           <span className="text-sm font-light text-gray900">

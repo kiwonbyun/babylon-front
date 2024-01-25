@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import Divider from '@/components/atoms/Divider';
 import Logo from '@/components/atoms/Logo';
 import Google from '@/components/icons/Google';
@@ -9,13 +8,13 @@ import SnsLoginButton from '@/components/atoms/SnsLoginButton';
 
 const Login = () => {
   return (
-    <section className={clsx('h-full')}>
-      <div className="h-1/2 flex-col-box gap-6">
+    <section className="h-full sm:mt-16">
+      <div className="h-1/2 flex-col-box gap-6 sm:h-fit">
         <Logo />
         <LoginForm />
       </div>
-      <Divider className="mx-4">or</Divider>
-      <div className="flex-col-box gap-4 h-1/3">
+      <Divider className="mx-4 sm:mt-10 sm:mb-6">or</Divider>
+      <div className="flex-col-box gap-4 h-1/3 sm:h-fit">
         <SnsLoginButton
           href=""
           icon={<Kakao />}

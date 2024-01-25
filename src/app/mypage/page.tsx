@@ -2,13 +2,14 @@ import Button from '@/components/atoms/Button/Button';
 import ImageCircle from '@/components/atoms/ImageCircle';
 import { loginCheck } from '@/lib/serverActions';
 import { getUser } from '@/lib/serverFetch';
+import { LoginUser } from '@/types/authInterface';
 import Link from 'next/link';
 import React from 'react';
 
 async function MyPage() {
   const token = await loginCheck();
   if (!token) return null;
-  const user = await getUser({ id: token?.sub });
+  const user = (await getUser({ id: token.sub })) as LoginUser;
 
   return (
     <main className="h-screen">
