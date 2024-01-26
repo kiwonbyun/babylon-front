@@ -41,7 +41,7 @@ function EditForm({ user }: { user: LoginUser }) {
     setClientImage(null);
   };
 
-  const updateUser = (formdata: any) => {
+  const updateUser = (formdata: FormData) => {
     formdata.append('profileImage', clientImage ?? '');
     startTransition(() => {
       updateUserSAWithId(formdata)

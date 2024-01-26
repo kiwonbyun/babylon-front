@@ -3,17 +3,18 @@ import { RadioGroup } from '@headlessui/react';
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import CheckCircle from '../icons/CheckCircle';
+import { PayMethodEnum } from '@/types/bidInterface';
 
-type RadioItem = {
+export type RadioItem = {
   name: string;
   desc: string;
   icon: React.ReactNode;
-  key: string;
+  key: PayMethodEnum;
 };
 
 interface CustomRadioProps {
   items: RadioItem[];
-  handleChange?: (e: any) => void;
+  handleChange?: (e: RadioItem) => void;
 }
 
 function CustomRadio({ items, handleChange }: CustomRadioProps) {

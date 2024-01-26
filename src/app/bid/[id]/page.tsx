@@ -19,7 +19,7 @@ async function BidPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className="w-4/5 m-auto flex mt-4 gap-5 md:flex-col sm:flex-col">
+    <form className="w-4/5 m-auto flex mt-4 gap-5 md:flex-col sm:flex-col">
       <section className="w-full lg:w-2/3">
         <h1 className="text-2xl font-semibold">식사권 경매 입찰</h1>
         <LabeledBox label="입찰 상품" className="my-6">
@@ -52,7 +52,7 @@ async function BidPage({ params }: { params: { id: string } }) {
         </LabeledBox>
         <LabeledBox label="주문자" className="my-6">
           <div className="flex flex-col gap-1">
-            <LabeledInput label="이름" horizontal />
+            <LabeledInput label="이름" horizontal name="name" />
             <LabeledInput
               label="이메일"
               horizontal
@@ -62,12 +62,18 @@ async function BidPage({ params }: { params: { id: string } }) {
             <LabeledInput
               label="연락처"
               horizontal
+              name="phone"
               placeholder="연락 가능한 휴대폰번호를 입력해주세요"
               className="w-72"
               type="number"
             />
             <div className="flex gap-1 lg:gap-4 md:flex-col sm:flex-col">
-              <LabeledInput label="입찰금액" horizontal type="number" />
+              <LabeledInput
+                label="입찰금액"
+                horizontal
+                type="number"
+                name="bidPrice"
+              />
               <LabeledInput
                 label="현재 입찰금액"
                 horizontal
@@ -86,10 +92,15 @@ async function BidPage({ params }: { params: { id: string } }) {
         <div className="border border-solid border-gray200 md:border-none sm:border-none rounded h-96 lg:p-4">
           <h2 className="text-xl">결제금액</h2>
           <Divider className="my-2" />
-          <PayButton />
+          <PayButton
+            userEmail={user.email}
+            currentPrice={post.bidPrice}
+            productName={post.title}
+            productId={post.id}
+          />
         </div>
       </section>
-    </main>
+    </form>
   );
 }
 

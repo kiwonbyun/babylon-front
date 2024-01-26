@@ -7,6 +7,8 @@ import { jwtDecode } from 'jwt-decode';
 import { RolesEnum, TokenUser } from '@/types/authInterface';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { CustomAxiosError, CustomError } from '@/types/commonInterface';
+import { AxiosError } from 'axios';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
@@ -58,9 +60,13 @@ export async function loginServerAction(prevState: State, formData: FormData) {
       httpOnly: true,
     });
     return { message: 'success' };
-  } catch (err: any) {
-    return { message: err.response.data.message };
+  } catch (err) {
+    const error = err as AxiosError<CustomAxiosError>;
+    return {
+      message: error?.response?.data.message ?? '서버 오류가 발생했습니다.',
+    };
   }
+  ``;
 }
 
 export const loginCheck = async () => {
@@ -125,8 +131,11 @@ export const signupServerAction = async (
       httpOnly: true,
     });
     return { message: 'success' };
-  } catch (err: any) {
-    return { message: err.response.data.message };
+  } catch (err) {
+    const error = err as AxiosError<CustomAxiosError>;
+    return {
+      message: error.response?.data.message ?? '서버 오류가 발생했습니다.',
+    };
   }
 };
 
@@ -159,8 +168,11 @@ export const updateUserSA = async (id: number, data: FormData) => {
       data,
       accessToken: getAccessToken(),
     });
-  } catch (err: any) {
-    throw new Error(err.response.data.message ?? '서버 오류가 발생했습니다.');
+  } catch (err) {
+    const error = err as AxiosError<CustomAxiosError>;
+    throw new Error(
+      error.response?.data.message ?? '서버 오류가 발생했습니다.'
+    );
   }
   revalidatePath('/mypage');
   redirect('/mypage');

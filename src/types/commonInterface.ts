@@ -10,6 +10,12 @@ export interface CustomError {
   };
 }
 
+export interface CustomAxiosError {
+  message?: string;
+  error?: string;
+  statusCode?: number;
+}
+
 export interface Banner {
   link?: string;
   bannerImage: string;
