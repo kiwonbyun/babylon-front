@@ -6,6 +6,7 @@ import { RequestPayParams, RequestPayResponse } from 'iamport-typings';
 import { toast } from 'sonner';
 import { usePayMethodStore } from '@/hooks/Store/usePayMethodStore';
 import { v4 as uuidv4 } from 'uuid';
+import { createBidSA } from '@/lib/serverActions';
 
 interface RequestPay extends RequestPayParams {
   company: string;
@@ -85,8 +86,23 @@ function PayButton({
 
     if (success) {
       // 우리서버에 결제 정보를 저장하는 로직이 들어갈 예정 .then()으로 처리
-      toast.success(`${productName} 입찰에 성공했습니다.`);
-      router.replace('/');
+      createBidSA({
+        postId: productId,
+        payload: {
+          email: buyer_email as string,
+          phone: buyer_tel as string,
+          bidPrice: paid_amount as number,
+          name: buyer_name as string,
+          merchant_uid,
+        },
+      })
+        .then(() => {
+          toast.success(`${productName} 입찰에 성공했습니다.`);
+          router.replace('/');
+        })
+        .catch(() => {
+          toast.error('입찰에 실패했습니다. 고객센터로 문의해주세요.');
+        });
     } else {
       toast.error(`결제 실패: ${error_msg}`);
     }

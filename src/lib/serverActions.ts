@@ -9,6 +9,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { CustomAxiosError, CustomError } from '@/types/commonInterface';
 import { AxiosError } from 'axios';
+import { createBid } from '@/api/bid';
+import { CreateBidPayloadType } from '@/types/bidInterface';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
@@ -176,4 +178,21 @@ export const updateUserSA = async (id: number, data: FormData) => {
   }
   revalidatePath('/mypage');
   redirect('/mypage');
+};
+
+export const createBidSA = async ({
+  postId,
+  payload,
+}: {
+  postId: number;
+  payload: CreateBidPayloadType;
+}) => {
+  try {
+    await createBid({ postId, data: payload, accessToken: getAccessToken() });
+  } catch (err) {
+    const error = err as AxiosError<CustomAxiosError>;
+    throw new Error(
+      error.response?.data.message ?? '서버 오류가 발생했습니다.'
+    );
+  }
 };
