@@ -1,8 +1,11 @@
 import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
+import Card from '@/components/icons/Card';
+import NaverPayIcon from '@/components/icons/NaverPayIcon';
 import LabeledBox from '@/components/molecules/LabeledBox';
 import LabeledInput from '@/components/molecules/LabeledInput';
 import PayButton from '@/components/molecules/PayButton';
+import CustomRadio from '@/components/templates/CustomRadio';
 import { loginCheck } from '@/lib/serverActions';
 import { getPostDetail } from '@/lib/serverFetch';
 import { moneyFormatter } from '@/utils/formatter';
@@ -76,7 +79,20 @@ async function BidPage({ params }: { params: { id: string } }) {
           </div>
         </LabeledBox>
         <LabeledBox label="결제수단" className="my-6">
-          <div className="flex flex-col gap-1"></div>
+          <CustomRadio
+            items={[
+              {
+                name: '카드',
+                desc: '카드 결제합니다',
+                icon: <Card />,
+              },
+              {
+                name: '네이버페이',
+                desc: '네이버페이로 결제합니다',
+                icon: <NaverPayIcon />,
+              },
+            ]}
+          />
         </LabeledBox>
       </section>
       <section className="w-1/3 mt-10">
