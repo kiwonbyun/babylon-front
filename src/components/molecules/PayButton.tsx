@@ -3,12 +3,16 @@ import React from 'react';
 import Button from '@components/atoms/Button/Button';
 import { RequestPayParams, RequestPayResponse } from 'iamport-typings';
 import { toast } from 'sonner';
+import { usePayMethodStore } from '@/hooks/Store/usePayMethodStore';
+import { v4 as uuidv4 } from 'uuid';
 
 interface RequestPay extends RequestPayParams {
   company: string;
 }
 
 function PayButton() {
+  const pay_method = usePayMethodStore((state) => state.method);
+
   const onClickPayment = () => {
     if (!window.IMP) return;
     /* 1. 가맹점 식별하기 */
@@ -18,8 +22,8 @@ function PayButton() {
     /* 2. 결제 데이터 정의하기 */
     const data: RequestPay = {
       pg: 'kcp.AO09C', // PG사 : https://developers.portone.io/docs/ko/tip/pg-2 참고
-      pay_method: 'naverpay', // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+      pay_method, // 결제수단
+      merchant_uid: `mid_${uuidv4()}`, // 주문번호
       amount: 1000, // 결제금액
       company: 'BABYLON 식사권 입찰',
       name: '아임포트 결제 데이터 분석', // 주문명
@@ -45,7 +49,11 @@ function PayButton() {
       toast.error(`결제 실패: ${error_msg}`);
     }
   }
-  return <Button onClick={onClickPayment}>결제하기</Button>;
+  return (
+    <Button onClick={onClickPayment} type="submit">
+      결제하기
+    </Button>
+  );
 }
 
 export default PayButton;

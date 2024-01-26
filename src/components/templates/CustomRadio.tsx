@@ -4,18 +4,29 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import CheckCircle from '../icons/CheckCircle';
 
-type RadioItems = {
+type RadioItem = {
   name: string;
   desc: string;
   icon: React.ReactNode;
-}[];
+  key: string;
+};
 
-function CustomRadio({ items }: { items: RadioItems }) {
+interface CustomRadioProps {
+  items: RadioItem[];
+  handleChange?: (e: any) => void;
+}
+
+function CustomRadio({ items, handleChange }: CustomRadioProps) {
   const [selected, setSelected] = useState(items[0]);
+  const onChange = (e: RadioItem) => {
+    setSelected(e);
+    if (handleChange) handleChange(e);
+  };
+
   return (
     <div className="w-full py-4">
       <div className="mx-auto w-full">
-        <RadioGroup value={selected} onChange={setSelected}>
+        <RadioGroup value={selected} onChange={onChange}>
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
           <div className="space-x-2 flex justify-start">
             {items.map((plan) => (
@@ -51,13 +62,13 @@ function CustomRadio({ items }: { items: RadioItems }) {
                             {checked && <CheckCircle className="!h-4 !w-4" />}
                           </RadioGroup.Label>
                           <RadioGroup.Description
-                            as="span"
+                            as="p"
                             className={clsx('inline text-xs', {
                               'text-sky100': checked,
                               'text-gray500': !checked,
                             })}
                           >
-                            <span>{plan.desc}</span>{' '}
+                            <span>{plan.desc}</span>
                           </RadioGroup.Description>
                           <RadioGroup.Description className="w-full flex-box">
                             {plan.icon}

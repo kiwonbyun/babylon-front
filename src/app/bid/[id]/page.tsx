@@ -1,11 +1,8 @@
-import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
-import Card from '@/components/icons/Card';
-import NaverPayIcon from '@/components/icons/NaverPayIcon';
 import LabeledBox from '@/components/molecules/LabeledBox';
 import LabeledInput from '@/components/molecules/LabeledInput';
 import PayButton from '@/components/molecules/PayButton';
-import CustomRadio from '@/components/templates/CustomRadio';
+import PayMethodRadio from '@/components/templates/Bid/PayMethodRadio';
 import { loginCheck } from '@/lib/serverActions';
 import { getPostDetail } from '@/lib/serverFetch';
 import { moneyFormatter } from '@/utils/formatter';
@@ -22,31 +19,34 @@ async function BidPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className="w-4/5 m-auto flex mt-4 gap-5">
-      <section className="w-2/3">
+    <main className="w-4/5 m-auto flex mt-4 gap-5 md:flex-col sm:flex-col">
+      <section className="w-full lg:w-2/3">
         <h1 className="text-2xl font-semibold">식사권 경매 입찰</h1>
         <LabeledBox label="입찰 상품" className="my-6">
-          <div className="flex gap-2">
-            <Image
-              alt="bid-product"
-              src={post.thumbnails[0]}
-              width={150}
-              height={150}
-              style={{
-                objectFit: 'cover',
-                objectPosition: 'center',
-              }}
-              priority
-              placeholder="blur"
-              blurDataURL={post.base64}
-            />
-            <div className="flex flex-col gap-1">
-              <span className="text-lg font-semibold">{post.title}</span>
-              <span>
+          <div className="flex gap-2 sm:flex-col">
+            <div className="relative aspect-video w-1/3 sm:w-full">
+              <Image
+                alt="bid-product"
+                src={post.thumbnails[0]}
+                fill
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                }}
+                priority
+                placeholder="blur"
+                blurDataURL={post.base64}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-lg font-semibold leading-5">
+                {post.title}
+              </span>
+              <span className="text-sm">
                 미팅 날짜 :{' '}
                 {dayjs(post.lectureDateTime).format('YYYY.MM.DD hh시 mm분')}
               </span>
-              <span>멘토 : {post.mentor.name}</span>
+              <span className="text-sm">멘토 : {post.mentor.name}</span>
             </div>
           </div>
         </LabeledBox>
@@ -66,7 +66,7 @@ async function BidPage({ params }: { params: { id: string } }) {
               className="w-72"
               type="number"
             />
-            <div className="flex gap-4">
+            <div className="flex gap-1 lg:gap-4 md:flex-col sm:flex-col">
               <LabeledInput label="입찰금액" horizontal type="number" />
               <LabeledInput
                 label="현재 입찰금액"
@@ -79,24 +79,11 @@ async function BidPage({ params }: { params: { id: string } }) {
           </div>
         </LabeledBox>
         <LabeledBox label="결제수단" className="my-6">
-          <CustomRadio
-            items={[
-              {
-                name: '카드',
-                desc: '카드 결제합니다',
-                icon: <Card />,
-              },
-              {
-                name: '네이버페이',
-                desc: '네이버페이로 결제합니다',
-                icon: <NaverPayIcon />,
-              },
-            ]}
-          />
+          <PayMethodRadio />
         </LabeledBox>
       </section>
-      <section className="w-1/3 mt-10">
-        <div className="border border-solid border-gray200 rounded h-96 p-4">
+      <section className="w-full lg:w-1/3 lg:mt-10">
+        <div className="border border-solid border-gray200 md:border-none sm:border-none rounded h-96 lg:p-4">
           <h2 className="text-xl">결제금액</h2>
           <Divider className="my-2" />
           <PayButton />
