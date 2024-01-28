@@ -1,5 +1,7 @@
 import Button from '@/components/atoms/Button/Button';
 import ImageCircle from '@/components/atoms/ImageCircle';
+import MyBids from '@/components/templates/Mypage/MyBids';
+import MyFavorite from '@/components/templates/Mypage/MyFavorite';
 import { loginCheck } from '@/lib/serverActions';
 import { getUser } from '@/lib/serverFetch';
 import { LoginUser } from '@/types/authInterface';
@@ -12,7 +14,7 @@ async function MyPage() {
   const user = (await getUser({ id: token.sub })) as LoginUser;
 
   return (
-    <main className="h-screen">
+    <main className="min-h-screen">
       <section className="bg-slate900 text-white flex items-center gap-4 justify-center py-10">
         <ImageCircle alt="profile-image" src={user?.profileImage} />
         <div className="flex flex-col gap-2">
@@ -22,19 +24,9 @@ async function MyPage() {
           </Link>
         </div>
       </section>
-      <section className="grid grid-cols-2 w-4/5 mx-auto pt-6 sm:flex sm:flex-col">
-        <div className="flex flex-col">
-          <h3 className="text-lg font-semibold">내가 입찰한 미팅</h3>
-          <div className="flex justify-center items-center h-40">
-            준비중 입니다.
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <h3 className="text-lg font-semibold">내가 찜한 미팅</h3>
-          <div className="flex justify-center items-center h-40">
-            준비중 입니다.
-          </div>
-        </div>
+      <section className="w-4/5 mx-auto pt-6 flex md:flex-col sm:flex-col sm:gap-4 md:gap-4">
+        <MyBids />
+        <MyFavorite />
       </section>
     </main>
   );

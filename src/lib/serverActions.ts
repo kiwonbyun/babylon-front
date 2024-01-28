@@ -195,4 +195,5 @@ export const createBidSA = async ({
       error.response?.data.message ?? '서버 오류가 발생했습니다.'
     );
   }
+  revalidatePath('/mypage');
 };

@@ -66,6 +66,7 @@ function PayButton({
 
   const callback = (response: RequestPayResponse) => {
     const {
+      imp_uid,
       success,
       error_msg,
       buyer_email,
@@ -75,20 +76,12 @@ function PayButton({
       paid_amount,
     } = response;
 
-    console.log({
-      productId,
-      buyer_email,
-      buyer_name,
-      buyer_tel,
-      paid_amount,
-      merchant_uid,
-    });
-
     if (success) {
       // 우리서버에 결제 정보를 저장하는 로직이 들어갈 예정 .then()으로 처리
       createBidSA({
         postId: productId,
         payload: {
+          imp_uid: imp_uid as string,
           email: buyer_email as string,
           phone: buyer_tel as string,
           bidPrice: paid_amount as number,

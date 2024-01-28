@@ -1,4 +1,5 @@
 import { LoginUser } from '@/types/authInterface';
+import { BidType } from '@/types/bidInterface';
 import { Post } from '@/types/postsInterface';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -59,5 +60,17 @@ export const getUser = async ({ id }: { id?: number }) => {
     },
   });
   const data: LoginUser = await res.json();
+  return data;
+};
+
+export const getMyBids = async () => {
+  const res = await fetch(`${process.env.SERVER_URL}/bids/my`, {
+    cache: 'no-store',
+    headers: {
+      Authorization: `Bearer ${accessToken()}`,
+    },
+  });
+
+  const data: BidType[] = await res.json();
   return data;
 };
