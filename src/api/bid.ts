@@ -1,20 +1,13 @@
-import { CreateBidPayloadType } from '@/types/bidInterface';
 import client from './client';
 
-export const createBid = ({
-  postId,
-  data,
-  accessToken,
-}: {
-  postId: number;
-  data: CreateBidPayloadType;
-  accessToken: string;
-}) => {
-  return client
-    .post(`/bids/${postId}`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-    .then((res) => res.data);
-};
+export const prepareBid = ({ postId, data, accessToken }: any) =>
+  client.post(`/bids/prepare/${postId}`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+export const completeBid = ({ postId, data, accessToken }: any) =>
+  client.post(`/bids/complete/${postId}`, data, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });

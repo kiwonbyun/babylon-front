@@ -5,8 +5,7 @@ import Button from '@components/atoms/Button/Button';
 import { RequestPayParams, RequestPayResponse } from 'iamport-typings';
 import { toast } from 'sonner';
 import { usePayMethodStore } from '@/hooks/Store/usePayMethodStore';
-import { v4 as uuidv4 } from 'uuid';
-import { createBidSA } from '@/lib/serverActions';
+import { completeBidSA, prepareBidSA } from '@/lib/serverActions';
 
 interface RequestPay extends RequestPayParams {
   company: string;
@@ -29,7 +28,7 @@ function PayButton({
 
   const pay_method = usePayMethodStore((state) => state.method);
 
-  const onClickPayment = (formdata: FormData) => {
+  const onClickPayment = async (formdata: FormData) => {
     if (!window.IMP) return;
 
     const name = formdata.get('name');
@@ -45,13 +44,22 @@ function PayButton({
       return;
     }
 
+    const preparedMerchantUid = await prepareBidSA({
+      postId: productId,
+      data: {
+        bidPrice: Number(bidPrice),
+        name: String(name),
+        phone: String(phone),
+      },
+    });
+
     const { IMP } = window;
     IMP.init(process.env.NEXT_PUBLIC_IMPORT_STORE_CODE as string); // 가맹점 식별코드
 
     const data: RequestPay = {
       pg: 'kcp.AO09C', // PG사 : https://developers.portone.io/docs/ko/tip/pg-2 참고
       pay_method, // 결제수단
-      merchant_uid: `mid_${uuidv4()}`, // 주문번호
+      merchant_uid: preparedMerchantUid, // 주문번호
       amount: +bidPrice, // 결제금액
       company: 'BABYLON 식사권 입찰',
       name: productName, // 주문명
@@ -65,40 +73,24 @@ function PayButton({
   };
 
   const callback = (response: RequestPayResponse) => {
-    const {
-      imp_uid,
-      success,
-      error_msg,
-      buyer_email,
-      buyer_name,
-      buyer_tel,
-      merchant_uid,
-      paid_amount,
-    } = response;
+    const { imp_uid, success, error_msg, merchant_uid } = response;
 
-    if (success) {
-      // 우리서버에 결제 정보를 저장하는 로직이 들어갈 예정 .then()으로 처리
-      createBidSA({
-        postId: productId,
-        payload: {
-          imp_uid: imp_uid as string,
-          email: buyer_email as string,
-          phone: buyer_tel as string,
-          bidPrice: paid_amount as number,
-          name: buyer_name as string,
-          merchant_uid,
-        },
-      })
-        .then(() => {
-          toast.success(`${productName} 입찰에 성공했습니다.`);
-          router.replace('/');
-        })
-        .catch(() => {
-          toast.error('입찰에 실패했습니다. 고객센터로 문의해주세요.');
-        });
-    } else {
-      toast.error(`결제 실패: ${error_msg}`);
+    if (!success) {
+      toast.error(`결제에 실패했습니다. ${error_msg}`);
+      return;
     }
+
+    completeBidSA({
+      postId: productId,
+      data: { imp_uid: String(imp_uid), merchant_uid },
+    })
+      .then(() => {
+        toast.success(`${productName} 입찰에 성공했습니다.`);
+        router.replace('/');
+      })
+      .catch(() => {
+        toast.error('입찰에 실패했습니다. 고객센터로 문의해주세요.');
+      });
   };
 
   return (

@@ -5,13 +5,15 @@ export const enum PayMethodEnum {
   NAVERPAY = 'naverpay',
 }
 
-export type CreateBidPayloadType = {
+export type PrepareBidType = {
   name: string;
   phone: string;
   bidPrice: number;
-  email: string;
-  merchant_uid: string;
+};
+
+export type CompleteBidType = {
   imp_uid: string;
+  merchant_uid: string;
 };
 
 export type BidType = {
