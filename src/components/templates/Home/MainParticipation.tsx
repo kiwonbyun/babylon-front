@@ -28,13 +28,14 @@ function MainParticipation() {
       </div>
       <Link
         href={'/participation'}
-        className="relative border border-solid aspect-[10/6] flex-1"
+        className="relative border border-solid aspect-video w-1/2 sm:w-full"
       >
         <Image
           alt="participant-banner"
           src="/participation.webp"
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+          style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
       </Link>
     </div>

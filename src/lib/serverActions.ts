@@ -11,6 +11,7 @@ import { CustomAxiosError } from '@/types/commonInterface';
 import { AxiosError } from 'axios';
 import { completeBid, prepareBid } from '@/api/bid';
 import { CompleteBidType, PrepareBidType } from '@/types/bidInterface';
+import { errorReport } from '@/api/common';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
@@ -68,7 +69,42 @@ export async function loginServerAction(prevState: State, formData: FormData) {
       message: error?.response?.data.message ?? '서버 오류가 발생했습니다.',
     };
   }
-  ``;
+}
+
+const errorReportSchema = z.object({
+  name: z.string().refine((value) => value.replace(/\s/g, '').length >= 2, {
+    message: '이름은 최소 2자 이상입니다.',
+  }),
+  email: z.string().email({ message: '이메일 형식이 올바르지 않습니다.' }),
+  content: z.string().refine((value) => value.replace(/\s/g, '').length >= 1, {
+    message: '내용을 입력해주세요',
+  }),
+});
+
+export async function errorReportSA(prevState: State, formData: FormData) {
+  const validatedFields = errorReportSchema.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    content: formData.get('content'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: '',
+    };
+  }
+  const { email, content, name } = validatedFields.data;
+
+  try {
+    await errorReport({ name, email, content });
+    return { message: '에러를 성공적으로 제보했습니다.' };
+  } catch (err) {
+    const error = err as AxiosError<CustomAxiosError>;
+    return {
+      message: error.response?.data.message ?? '서버 오류가 발생했습니다.',
+    };
+  }
 }
 
 export const loginCheck = async () => {

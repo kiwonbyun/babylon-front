@@ -26,7 +26,7 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
         }
       )}
     >
-      <ul className="flex-box gap-3">
+      <div className="flex-box gap-3">
         <Logo theme={theme} />
         <small
           className={clsx('text-gray400 text-xs sm:hidden', {
@@ -36,8 +36,8 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
         >
           {SERVICE_MISSION}
         </small>
-      </ul>
-      <ul
+      </div>
+      <div
         className={clsx('flex-box gap-4 text-sm', {
           'text-white': darkTheme,
           'text-gray900': !darkTheme,
@@ -57,7 +57,7 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
             <Button className="shadow-none bg-red600 text-white">로그인</Button>
           </Link>
         )}
-      </ul>
+      </div>
     </header>
   );
 }

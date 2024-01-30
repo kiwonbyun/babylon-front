@@ -1,72 +1,52 @@
+'use client';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import Button from '../atoms/Button/Button';
-import { useCreateErrorReport } from '@/hooks/Common/Mutate/useCreateErrorReport';
-import { zodResolver } from '@hookform/resolvers/zod';
 import LabeledInput from '../molecules/LabeledInput';
 import LabeledTextArea from '../molecules/LabeledTextArea';
-import {
-  ErrorReportFormInputType,
-  errorReportSchema,
-} from '@/types/formSchema';
-import { toast } from 'sonner';
+import { fontEmoji } from '@/lib/fonts';
+import { errorReportSA } from '@/lib/serverActions';
+import { useFormState } from 'react-dom';
+import Exclamation from '../icons/Exclamation';
 
-interface IReportFromProps {
-  closeForm: () => void;
-}
-
-function ReportForm({ closeForm }: IReportFromProps) {
-  const { register, handleSubmit, formState } =
-    useForm<ErrorReportFormInputType>({
-      resolver: zodResolver(errorReportSchema),
-    });
-  const { errors } = formState;
-  const { mutateAsync } = useCreateErrorReport();
-
-  const onSubmit = handleSubmit((data) => {
-    if (!data.name || !data.email || !data.content) return;
-    mutateAsync({
-      name: data.name,
-      email: data.email,
-      content: data.content,
-    }).then(() => {
-      toast.success(
-        <div className="flex-col-box">
-          <p>오류 제보가 완료되었습니다!</p>
-          <p>빠른 시일 내에 수정하겠습니다.</p>
-        </div>
-      );
-      closeForm();
-    });
-  });
+function ReportForm() {
+  const initialState = { message: '', errors: {} };
+  const [state, dispatch] = useFormState(errorReportSA, initialState);
 
   return (
-    <section className="mt-10 flex-col-box gap-10 mb-20">
-      <h2>오류를 제보해주시면 빠르게 개선하겠습니다~!</h2>
-      <form className="flex flex-col gap-4 w-1/3" onSubmit={onSubmit}>
+    <section className="mt-20 flex-col-box gap-10 mb-20">
+      <h2>
+        오류를 제보해주시면 빠르게 개선하겠습니다
+        <span className={fontEmoji.className}>😅</span>
+      </h2>
+      <form className="flex flex-col gap-4 w-1/3" action={dispatch}>
         <LabeledInput
           className="w-full"
-          error={errors.name?.message}
+          error={state.errors?.name}
+          name="name"
           label="이름"
-          {...register('name')}
         />
         <LabeledInput
           className="w-full"
-          error={errors.email?.message}
+          error={state.errors?.email}
+          name="email"
           label="이메일"
-          {...register('email')}
         />
         <LabeledTextArea
           className="w-full h-44"
           desc="오류 내용을 입력해주세요"
-          error={errors.content?.message}
+          name="content"
+          error={state.errors?.content}
           label="오류 내용"
-          {...register('content')}
         />
-
-        <footer className="flex-box gap-5">
-          <Button type="submit">제출하기</Button>
-        </footer>
+        {state?.message && (
+          <p className="text-xs text-red500 flex items-center gap-1">
+            <Exclamation className="h-4 w-4" />
+            {state.message}
+          </p>
+        )}
+        <Button className="bg-gray400 text-white" type="submit">
+          오류 제보하기
+        </Button>
       </form>
     </section>
   );
