@@ -66,7 +66,7 @@ function PayButton({
       buyer_name: String(name), // 구매자 이름
       buyer_tel: String(phone), // 구매자 전화번호
       buyer_email: String(userEmail), // 구매자 이메일
-      m_redirect_url: 'http://localhost:3000/bid/complete', // 결제 완료 후 보낼 링크
+      m_redirect_url: `http://localhost:3000/bid/complete/${productId}`, // 결제 완료 후 보낼 링크
     };
 
     IMP.request_pay(data, callback);
