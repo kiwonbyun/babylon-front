@@ -30,7 +30,7 @@ export const getPosts = async (query?: string) => {
   return base64_data;
 };
 
-export const getPostDetail = async ({ id }: { id: string }) => {
+export const getPostDetail = async (id: string) => {
   const res = await fetch(`${process.env.SERVER_URL}/posts/${id}`, {
     cache: 'no-store',
   });
@@ -73,4 +73,28 @@ export const getMyBids = async () => {
 
   const data: BidType[] = await res.json();
   return data;
+};
+
+export const getMyLikes = async () => {
+  const res = await fetch(`${process.env.SERVER_URL}/users/likes/my`, {
+    cache: 'no-store',
+    headers: {
+      Authorization: `Bearer ${accessToken()}`,
+    },
+  });
+
+  const data = await res.json();
+  return data;
+};
+
+export const getIsLiked = async (postId: string) => {
+  const res = await fetch(`${process.env.SERVER_URL}/users/likes/${postId}`, {
+    cache: 'no-store',
+    next: { tags: ['like'] },
+    // next: { revalidate: 60 * 10, tags: ['like'] },
+    headers: {
+      Authorization: `Bearer ${accessToken()}`,
+    },
+  });
+  return (await res.json()) as boolean;
 };

@@ -1,12 +1,16 @@
 import Button from '@/components/atoms/Button/Button';
 import ImageCircle from '@/components/atoms/ImageCircle';
+import {
+  MyBidsSkeleton,
+  MyFavoriteSkeleton,
+} from '@/components/molecules/skeletons';
 import MyBids from '@/components/templates/Mypage/MyBids';
 import MyFavorite from '@/components/templates/Mypage/MyFavorite';
 import { loginCheck } from '@/lib/serverActions';
 import { getUser } from '@/lib/serverFetch';
 import { LoginUser } from '@/types/authInterface';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 async function MyPage() {
   const token = await loginCheck();
@@ -25,8 +29,12 @@ async function MyPage() {
         </div>
       </section>
       <section className="w-4/5 mx-auto pt-6 flex md:flex-col sm:flex-col sm:gap-4 md:gap-4">
-        <MyBids />
-        <MyFavorite />
+        <Suspense fallback={<MyBidsSkeleton />}>
+          <MyBids />
+        </Suspense>
+        <Suspense fallback={<MyFavoriteSkeleton />}>
+          <MyFavorite />
+        </Suspense>
       </section>
     </main>
   );

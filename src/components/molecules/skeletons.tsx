@@ -49,3 +49,82 @@ export function MainPostsSkeleton() {
     </div>
   );
 }
+
+export function MyBidsSkeleton() {
+  return (
+    <div className="flex flex-col flex-1">
+      <h3 className="text-lg font-semibold mb-5">내가 입찰한 미팅</h3>
+      <ul className="flex flex-col gap-2 ">
+        {Array.from({ length: 2 }).map((_, idx) => (
+          <li key={idx}>
+            <div className="border border-solid border-gray200 rounded px-4 py-2 lg:w-[90%] flex flex-col gap-2">
+              <span className="flex text-xs text-gray600 gap-2">
+                입찰날짜 • <SkeletonLine className="!w-24 h-4" />
+              </span>
+              <section className="flex gap-2 items-start">
+                <div className="relative aspect-video w-40">
+                  <SkeletonLine className="w-full aspect-video rounded-none" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-semibold line-clamp-1">
+                    <SkeletonLine className="!w-56 h-4" />
+                  </h3>
+                  <div className="text-sm text-gray600 flex sm:flex-col gap-2 items-center">
+                    <span>미팅 날짜 : </span>
+                    <SkeletonLine className="!w-24 h-4" />
+                  </div>
+                  <div className="font-semibold text-sm flex sm:flex-col gap-2 items-center">
+                    <span>현재 최고 입찰가 :</span>
+                    <SkeletonLine className="!w-24 h-4" />
+                  </div>
+                  <div className="font-semibold text-red500 text-sm flex sm:flex-col gap-2 items-center">
+                    <span>내 입찰가 :</span>
+                    <SkeletonLine className="!w-24 h-4" />
+                  </div>
+                </div>
+              </section>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function MyFavoriteSkeleton() {
+  return (
+    <div className="flex flex-col flex-1">
+      <h3 className="text-lg font-semibold mb-5">내가 찜한 미팅</h3>
+      <ul className="flex flex-col gap-2">
+        {Array.from({ length: 2 }).map((_, idx) => (
+          <li key={idx}>
+            <div className="border border-solid border-gray200 rounded px-4 py-2 lg:w-[90%] flex flex-col gap-2">
+              <section className="flex gap-2 items-start">
+                <div className="relative aspect-video w-40">
+                  <SkeletonLine className="w-full aspect-video rounded-none" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-semibold line-clamp-1">
+                    <SkeletonLine className="!w-48 h-4" />
+                  </h3>
+                  <div className="text-sm text-gray600 flex sm:flex-col items-center gap-2">
+                    <span>미팅 날짜 :</span>
+                    <SkeletonLine className="!w-24 h-4" />
+                  </div>
+                  <div className="text-sm text-gray600 flex sm:flex-col items-center gap-2">
+                    <span>미팅 카테고리 :</span>
+                    <SkeletonLine className="!w-24 h-4" />
+                  </div>
+                  <div className="font-semibold text-sm flex sm:flex-col items-center gap-2">
+                    <span>현재 최고 입찰가 :</span>
+                    <SkeletonLine className="!w-24 h-4" />
+                  </div>
+                </div>
+              </section>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

@@ -5,13 +5,14 @@ import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { jwtDecode } from 'jwt-decode';
 import { RolesEnum, TokenUser } from '@/types/authInterface';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { CustomAxiosError } from '@/types/commonInterface';
 import { AxiosError } from 'axios';
 import { completeBid, prepareBid } from '@/api/bid';
 import { CompleteBidType, PrepareBidType } from '@/types/bidInterface';
 import { errorReport } from '@/api/common';
+import { createLike, deleteLike } from '@/api/users';
 
 async function decodeJwt(jwt: string | undefined) {
   if (!jwt) return null;
@@ -254,4 +255,28 @@ export const completeBidSA = async ({
     );
   }
   revalidatePath(`/bid/${postId}`);
+};
+
+export const createLikeSA = async ({ postId }: { postId: string }) => {
+  try {
+    await createLike({ postId, accessToken: getAccessToken() });
+  } catch (e) {
+    const error = e as AxiosError<CustomAxiosError>;
+    throw new Error(
+      error.response?.data.message ?? '서버 오류가 발생했습니다.'
+    );
+  }
+  revalidateTag('like');
+};
+
+export const deleteLikeSA = async ({ postId }: { postId: string }) => {
+  try {
+    await deleteLike({ postId, accessToken: getAccessToken() });
+  } catch (e) {
+    const error = e as AxiosError<CustomAxiosError>;
+    throw new Error(
+      error.response?.data.message ?? '서버 오류가 발생했습니다.'
+    );
+  }
+  revalidateTag('like');
 };

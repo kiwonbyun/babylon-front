@@ -1,5 +1,5 @@
 import { fontPoppinsEN } from '@/lib/fonts';
-import { getPostDetail } from '@/lib/serverFetch';
+import { getIsLiked, getPostDetail } from '@/lib/serverFetch';
 import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
 import YoutubePlayer from '@/components/atoms/YoutubePlayer';
@@ -10,10 +10,11 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react';
+import LikeHeartButton from '@/components/molecules/LikeHeartButton';
 
 async function FirmShowingSection({ id }: { id: string }) {
-  const post = await getPostDetail({ id });
+  const post = await getPostDetail(id);
   const firmLinkId = post.firmLink
     ? new URL(post.firmLink).pathname.replaceAll('/', '')
     : null;
@@ -33,10 +34,9 @@ async function FirmShowingSection({ id }: { id: string }) {
           <span>|</span>
           <span>{post.views} views</span>
           <span>|</span>
-          <div className="flex items-center gap-1">
-            <Heart className="!w-4 !h-4" />
-            {post.likeCount}
-          </div>
+          <Suspense fallback={<div>asda</div>}>
+            <LikeHeartButton count={post.likeCount} postId={id} />
+          </Suspense>
         </div>
       </div>
       <Divider className="my-3" />

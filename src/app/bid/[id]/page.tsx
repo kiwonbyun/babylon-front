@@ -12,7 +12,7 @@ import React from 'react';
 
 async function BidPage({ params }: { params: { id: string } }) {
   const user = await loginCheck();
-  const post = await getPostDetail({ id: params.id });
+  const post = await getPostDetail(params.id);
 
   if (!user) {
     return null;
