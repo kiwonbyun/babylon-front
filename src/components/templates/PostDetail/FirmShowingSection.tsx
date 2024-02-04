@@ -41,7 +41,7 @@ async function FirmShowingSection({ id }: { id: string }) {
       </div>
       <Divider className="my-3" />
       <div className="flex justify-between items-center sm:flex-col sm:gap-4">
-        <div className="flex gap-10">
+        <div className="flex gap-10 sm:w-full sm:justify-between">
           <BidPrice
             axis="x"
             price={moneyFormatter(post.minPrice) + '+'}
@@ -58,7 +58,7 @@ async function FirmShowingSection({ id }: { id: string }) {
             axis="x"
           />
         </div>
-        <Link href={`/bid/${post.id}`}>
+        <Link href={`/bid/${post.id}`} className="sm:w-full">
           <Button className="bg-red600 text-white hover:bg-white hover:text-red500 hover:font-bold sm:w-full">
             멘토와 식사권 입찰
           </Button>

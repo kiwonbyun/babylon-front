@@ -49,6 +49,7 @@ function SignupForm() {
   const isEmail = EMAIL_REGEX.test(email);
 
   const handleSendVerify = () => {
+    if (!isEmail) return toast.error('이메일 형식이 올바르지 않습니다.');
     toast.promise(sendCode(email), {
       loading: '인증코드 전송중...',
       success: () => {

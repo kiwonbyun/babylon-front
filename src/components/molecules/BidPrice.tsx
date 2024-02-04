@@ -10,7 +10,7 @@ interface BidPriceProps {
 function BidPrice({ price, label, axis = 'y' }: BidPriceProps) {
   if (axis === 'x') {
     return (
-      <div className="flex gap-1 items-center">
+      <div className="flex gap-1 items-center sm:flex-col">
         <span className="font-light text-gray600">{label}</span>
         <span className="font-bold text-black">{price}</span>
       </div>
