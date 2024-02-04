@@ -1,5 +1,10 @@
 import GridPosts from '@/components/templates/Home/GridPosts';
 import { getPosts } from '../../lib/serverFetch';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Posts',
+};
 
 async function Posts() {
   const posts = await getPosts();

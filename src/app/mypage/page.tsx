@@ -9,8 +9,13 @@ import MyFavorite from '@/components/templates/Mypage/MyFavorite';
 import { loginCheck } from '@/lib/serverActions';
 import { getUser } from '@/lib/serverFetch';
 import { LoginUser } from '@/types/authInterface';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import React, { Suspense } from 'react';
+
+export const metadata: Metadata = {
+  title: 'MyPage',
+};
 
 async function MyPage() {
   const token = await loginCheck();

@@ -1,6 +1,11 @@
 import Button from '@/components/atoms/Button/Button';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'Login Fail',
+};
 
 function page() {
   return (

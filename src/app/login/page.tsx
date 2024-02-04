@@ -5,6 +5,11 @@ import Google from '@/components/icons/Google';
 import Kakao from '@/components/icons/Kakao';
 import LoginForm from '@/components/templates/Login/LoginForm';
 import SnsLoginButton from '@/components/atoms/SnsLoginButton';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login',
+};
 
 const Login = () => {
   return (

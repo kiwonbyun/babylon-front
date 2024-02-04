@@ -1,6 +1,11 @@
 import React from 'react';
 import Logo from '@/components/atoms/Logo';
 import SignupForm from '@/components/templates/Login/SignupForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sign Up',
+};
 
 function SignUp() {
   return (

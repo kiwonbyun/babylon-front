@@ -7,8 +7,13 @@ import { loginCheck } from '@/lib/serverActions';
 import { getPostDetail } from '@/lib/serverFetch';
 import { moneyFormatter } from '@/utils/formatter';
 import dayjs from 'dayjs';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'Bid',
+};
 
 async function BidPage({ params }: { params: { id: string } }) {
   const user = await loginCheck();

@@ -3,6 +3,11 @@ import { loginCheck } from '@/lib/serverActions';
 import EditForm from '@/components/templates/Mypage/EditForm';
 import { getUser } from '@/lib/serverFetch';
 import { LoginUser, TokenUser } from '@/types/authInterface';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edit Profile',
+};
 
 async function page() {
   const loginUser = (await loginCheck()) as TokenUser;
