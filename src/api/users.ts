@@ -5,7 +5,7 @@ interface LikePayload {
   accessToken: string;
 }
 
-export const createLike = ({ postId, accessToken }: LikePayload) =>
+export const postLike = ({ postId, accessToken }: LikePayload) =>
   client.post(
     `/users/likes/${postId}`,
     {},
@@ -13,8 +13,3 @@ export const createLike = ({ postId, accessToken }: LikePayload) =>
       headers: { Authorization: `Bearer ${accessToken}` },
     }
   );
-
-export const deleteLike = ({ postId, accessToken }: LikePayload) =>
-  client.delete(`/users/likes/${postId}`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });

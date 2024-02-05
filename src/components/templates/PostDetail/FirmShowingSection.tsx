@@ -12,9 +12,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { Suspense } from 'react';
 import LikeHeartButton from '@/components/molecules/LikeHeartButton';
+import { SkeletonLine } from '@/components/molecules/skeletons';
 
 async function FirmShowingSection({ id }: { id: string }) {
-  const post = await getPostDetail(id);
+  const [post, isLiked] = await Promise.all([
+    getPostDetail(id),
+    getIsLiked(id),
+  ]);
   const firmLinkId = post.firmLink
     ? new URL(post.firmLink).pathname.replaceAll('/', '')
     : null;
@@ -34,9 +38,11 @@ async function FirmShowingSection({ id }: { id: string }) {
           <span>|</span>
           <span>{post.views} views</span>
           <span>|</span>
-          <Suspense fallback={<div>asda</div>}>
-            <LikeHeartButton count={post.likeCount} postId={id} />
-          </Suspense>
+          <LikeHeartButton
+            count={post.likeCount}
+            postId={id}
+            isLiked={isLiked}
+          />
         </div>
       </div>
       <Divider className="my-3" />

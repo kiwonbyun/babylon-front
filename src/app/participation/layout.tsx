@@ -1,5 +1,6 @@
 import Footer from '@/components/templates/Footer';
 import Header from '@/components/templates/Header';
+import { EnumTheme } from '@/types/commonInterface';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -13,7 +14,7 @@ interface ParticipationLayoutProps {
 const ParticipationLayout = ({ children }: ParticipationLayoutProps) => {
   return (
     <main>
-      <Header />
+      <Header theme={EnumTheme.BLACK} />
       {children}
       <Footer />
     </main>

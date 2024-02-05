@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   },
   description:
     'Share your insights with people. Creating a more prosperous world.',
+  // 배포 후 수정 필요
+  // openGraph: {
+  //   title: 'BABYLON: Share your insights',
+  //   description:
+  //     'Share your insights with people. Creating a more prosperous world.',
+  // },
 };
 
 dayjs.locale('ko');
