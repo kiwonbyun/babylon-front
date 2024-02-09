@@ -27,7 +27,7 @@ const Login = () => {
           className="bg-[#FEE500]"
         />
         <SnsLoginButton
-          href="http://localhost:8000/auth/google"
+          href={process.env.NEXT_PUBLIC_SERVER_URL + '/auth/google'}
           icon={<Google />}
           text="Continue with Google"
           className="bg-[#4285F4]"

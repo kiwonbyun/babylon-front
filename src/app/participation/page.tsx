@@ -1,5 +1,5 @@
 import ReportForm from '@/components/templates/ReportForm';
-import Image from 'next/image';
+import { fontEmoji } from '@/lib/fonts';
 import React from 'react';
 
 function page() {
@@ -14,7 +14,15 @@ function page() {
         세상을 바꿀 능력의 기반이 될 수 있습니다. 자세한 진행은 바빌론이
         도와드리겠습니다.
       </p>
-      <ReportForm />
+      <ReportForm
+        confirmMessage="멘토 참여 신청하기"
+        textAreaDesc="멘토로 참여하고 싶은 이유를 적어주세요."
+        header={
+          <h1 className="text-xl font-semibold">
+            참여 신청 <span className={fontEmoji.className}>😄</span>
+          </h1>
+        }
+      />
     </main>
   );
 }

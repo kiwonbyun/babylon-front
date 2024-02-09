@@ -4,7 +4,6 @@ import Button from '@/components/atoms/Button/Button';
 import React from 'react';
 import { fontEmoji } from '../../lib/fonts';
 import Link from 'next/link';
-import ReportForm from '@/components/templates/ReportForm';
 
 export default function error({
   error,

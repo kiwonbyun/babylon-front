@@ -1,5 +1,6 @@
 import Button from '@/components/atoms/Button/Button';
 import ReportForm from '@/components/templates/ReportForm';
+import { fontEmoji } from '@/lib/fonts';
 import Link from 'next/link';
 import React from 'react';
 
@@ -25,7 +26,14 @@ export default function NotFound() {
           </Link>
         </footer>
       </section>
-      <ReportForm />
+      <ReportForm
+        header={
+          <h1>
+            오류를 제보해 주시면 빠르게 해결하겠습니다{' '}
+            <span className={fontEmoji.className}>😅</span>
+          </h1>
+        }
+      />
     </main>
   );
 }
