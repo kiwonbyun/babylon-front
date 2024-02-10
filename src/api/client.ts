@@ -4,7 +4,8 @@ import Cookie from 'js-cookie';
 const client = axios.create();
 
 // 인스턴스를 만든 후 기본값 변경하기
-client.defaults.baseURL = '43.200.191.3:8000';
+console.log('client.ts:', process.env.NEXT_PUBLIC_SERVER_URL);
+client.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 client.defaults.withCredentials = true;
 
 client.interceptors.request.use((config) => {
