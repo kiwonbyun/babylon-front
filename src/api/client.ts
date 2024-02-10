@@ -3,9 +3,8 @@ import Cookie from 'js-cookie';
 // 인스턴스를 생성할때 config 기본값 설정하기
 const client = axios.create();
 
-// 인스턴스를 만든 후 기본값 변경하기
-console.log('client.ts:', process.env.NEXT_PUBLIC_SERVER_URL);
-client.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
+client.defaults.baseURL =
+  'http://ec2-43-200-191-3.ap-northeast-2.compute.amazonaws.com:8000';
 client.defaults.withCredentials = true;
 
 client.interceptors.request.use((config) => {
