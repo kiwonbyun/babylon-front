@@ -10,6 +10,7 @@ import clsx from 'clsx';
 
 export default async function MainPosts() {
   const posts = await getPosts();
+  console.log({ posts });
 
   if (!posts.length) {
     return null;
