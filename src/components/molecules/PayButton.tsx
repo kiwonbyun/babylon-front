@@ -54,6 +54,7 @@ function PayButton({
     });
 
     const { IMP } = window;
+    console.log(process.env.NEXT_PUBLIC_IMPORT_STORE_CODE);
     IMP.init(process.env.NEXT_PUBLIC_IMPORT_STORE_CODE as string); // 가맹점 식별코드
 
     const data: RequestPay = {
@@ -66,7 +67,7 @@ function PayButton({
       buyer_name: String(name), // 구매자 이름
       buyer_tel: String(phone), // 구매자 전화번호
       buyer_email: String(userEmail), // 구매자 이메일
-      m_redirect_url: `http://localhost:3000/bid/complete/${productId}`, // 결제 완료 후 보낼 링크
+      m_redirect_url: `${process.env.NEXT_PUBLIC_DOMAIN}/bid/complete/${productId}`, // 결제 완료 후 보낼 링크
     };
 
     IMP.request_pay(data, callback);
