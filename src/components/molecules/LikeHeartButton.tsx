@@ -3,6 +3,7 @@ import React, { useOptimistic } from 'react';
 import Heart from '../icons/Heart';
 import clsx from 'clsx';
 import { postLikeSA } from '@/lib/serverActions';
+import { toast } from 'sonner';
 
 interface LikeHeartButtonProps {
   count: number;
@@ -30,6 +31,10 @@ function LikeHeartButton({ count, postId, isLiked }: LikeHeartButtonProps) {
   return (
     <div
       onClick={() => {
+        if (typeof isLiked !== 'boolean') {
+          toast.error('로그인이 필요합니다');
+          return;
+        }
         addOptimisticLike(optimisticLike.isLiked);
         postLikeSA({ postId });
       }}
@@ -37,8 +42,8 @@ function LikeHeartButton({ count, postId, isLiked }: LikeHeartButtonProps) {
     >
       <Heart
         className={clsx('!w-4 !h-4', {
-          'fill-red500': optimisticLike.isLiked,
-          'stroke-none': optimisticLike.isLiked,
+          'fill-red500': optimisticLike.isLiked === true,
+          'stroke-none': optimisticLike.isLiked === false,
         })}
       />
       {optimisticLike.count}

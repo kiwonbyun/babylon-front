@@ -99,7 +99,7 @@ export async function errorReportSA(prevState: State, formData: FormData) {
 
   try {
     await errorReport({ name, email, content });
-    return { message: '에러를 성공적으로 제보했습니다.' };
+    return { message: '요청이 성공했습니다.' };
   } catch (err) {
     const error = err as AxiosError<CustomAxiosError>;
     return {

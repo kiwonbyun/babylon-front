@@ -51,7 +51,7 @@ function ReportForm({
             {state.message}
           </p>
         )}
-        <Button className="bg-gray400 text-white" type="submit">
+        <Button className="bg-gray800 text-white" type="submit">
           {confirmMessage}
         </Button>
       </form>
