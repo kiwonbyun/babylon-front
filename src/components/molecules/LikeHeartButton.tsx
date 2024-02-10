@@ -43,7 +43,7 @@ function LikeHeartButton({ count, postId, isLiked }: LikeHeartButtonProps) {
       <Heart
         className={clsx('!w-4 !h-4', {
           'fill-red500': optimisticLike.isLiked === true,
-          'stroke-none': optimisticLike.isLiked === false,
+          'stroke-none': optimisticLike.isLiked === true,
         })}
       />
       {optimisticLike.count}

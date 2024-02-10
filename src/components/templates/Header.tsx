@@ -8,6 +8,7 @@ import { EnumTheme } from '@/types/commonInterface';
 import clsx from 'clsx';
 import { getUser } from '@/lib/serverFetch';
 import ImageCircle from '../atoms/ImageCircle';
+import HeaderProfileBtn from '../molecules/HeaderProfileBtn';
 
 async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
   const token = await loginCheck();
@@ -45,13 +46,7 @@ async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
       >
         <Link href={'/posts'}>게시물</Link>
         {user ? (
-          <Link href={'/mypage'}>
-            <ImageCircle
-              alt="login-user-profile"
-              src={user.profileImage}
-              className="!w-10 !h-10"
-            />
-          </Link>
+          <HeaderProfileBtn imageSrc={user.profileImage} />
         ) : (
           <Link href={'/login'}>
             <Button className="shadow-none bg-red600 text-white">로그인</Button>

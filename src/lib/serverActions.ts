@@ -72,6 +72,16 @@ export async function loginServerAction(prevState: State, formData: FormData) {
   }
 }
 
+export const logoutServerAction = async () => {
+  try {
+    cookies().delete('accessToken');
+    cookies().delete('refreshToken');
+  } catch (e) {
+    throw new Error('쿠키 에러 발생');
+  }
+  redirect('/');
+};
+
 const errorReportSchema = z.object({
   name: z.string().refine((value) => value.replace(/\s/g, '').length >= 2, {
     message: '이름은 최소 2자 이상입니다.',

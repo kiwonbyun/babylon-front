@@ -4,7 +4,8 @@ import Cookie from 'js-cookie';
 const client = axios.create();
 
 client.defaults.baseURL =
-  'http://ec2-43-200-191-3.ap-northeast-2.compute.amazonaws.com:8000';
+  // 'http://ec2-43-200-191-3.ap-northeast-2.compute.amazonaws.com:8000';
+  'http://localhost:8000';
 client.defaults.withCredentials = true;
 
 client.interceptors.request.use((config) => {
