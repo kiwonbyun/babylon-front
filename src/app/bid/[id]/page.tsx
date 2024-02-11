@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 async function BidPage({ params }: { params: { id: string } }) {
   const user = await loginCheck();
   const post = await getPostDetail(params.id);
+  const storeCode = process.env.IMPORT_STORE_CODE as string;
 
   if (!user) {
     return null;
@@ -102,6 +103,7 @@ async function BidPage({ params }: { params: { id: string } }) {
             currentPrice={post.bidPrice}
             productName={post.title}
             productId={post.id}
+            storeCode={storeCode}
           />
         </div>
       </section>

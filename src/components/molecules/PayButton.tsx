@@ -16,6 +16,7 @@ interface PayButtonProps {
   currentPrice: number;
   productName: string;
   productId: number;
+  storeCode: string;
 }
 
 function PayButton({
@@ -23,6 +24,7 @@ function PayButton({
   productName,
   userEmail,
   currentPrice,
+  storeCode,
 }: PayButtonProps) {
   const router = useRouter();
 
@@ -54,8 +56,8 @@ function PayButton({
     });
 
     const { IMP } = window;
-    console.log(process.env.NEXT_PUBLIC_IMPORT_STORE_CODE);
-    IMP.init(process.env.NEXT_PUBLIC_IMPORT_STORE_CODE as string); // 가맹점 식별코드
+    console.log(storeCode);
+    IMP.init(storeCode); // 가맹점 식별코드
 
     const data: RequestPay = {
       pg: 'kcp.AO09C', // PG사 : https://developers.portone.io/docs/ko/tip/pg-2 참고
