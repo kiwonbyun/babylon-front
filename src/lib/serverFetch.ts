@@ -5,15 +5,16 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { getPlaiceholder } from 'plaiceholder';
 
+const host =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8000'
+    : process.env.NEXT_PUBLIC_SERVER_URL;
+
 export const getPosts = async (query?: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/posts${query ?? ''}`,
-    {
-      // next: { revalidate: 60 * 10 },
-      cache: 'no-store',
-    }
-  );
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
+  const res = await fetch(`${host}/posts${query ?? ''}`, {
+    // next: { revalidate: 60 * 10 },
+    cache: 'no-store',
+  });
   const data: Post[] & { error: string } = await res.json();
 
   if (data.error) {
@@ -34,7 +35,7 @@ export const getPosts = async (query?: string) => {
 };
 
 export const getPostDetail = async (id: string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/posts/${id}`, {
+  const res = await fetch(`${host}/posts/${id}`, {
     cache: 'no-store',
   });
   const data: Post & { error: string } = await res.json();
@@ -56,7 +57,7 @@ const accessToken = () => cookies().get('accessToken')?.value;
 
 export const getUser = async ({ id }: { id?: number }) => {
   if (!id) return null;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/${id}`, {
+  const res = await fetch(`${host}/users/${id}`, {
     cache: 'no-store',
     headers: {
       Authorization: `Bearer ${accessToken()}`,
@@ -67,7 +68,7 @@ export const getUser = async ({ id }: { id?: number }) => {
 };
 
 export const getMyBids = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bids/my`, {
+  const res = await fetch(`${host}/bids/my`, {
     cache: 'no-store',
     headers: {
       Authorization: `Bearer ${accessToken()}`,
@@ -79,31 +80,24 @@ export const getMyBids = async () => {
 };
 
 export const getMyLikes = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/users/likes/my`,
-    {
-      cache: 'no-store',
-      headers: {
-        Authorization: `Bearer ${accessToken()}`,
-      },
-    }
-  );
+  const res = await fetch(`${host}/users/likes/my`, {
+    cache: 'no-store',
+    headers: {
+      Authorization: `Bearer ${accessToken()}`,
+    },
+  });
 
   const data = await res.json();
   return data;
 };
 
 export const getIsLiked = async (postId: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/users/likes/${postId}`,
-    {
-      cache: 'no-store',
-      next: { tags: ['like'] },
-      // next: { revalidate: 60 * 10, tags: ['like'] },
-      headers: {
-        Authorization: `Bearer ${accessToken()}`,
-      },
-    }
-  );
+  const res = await fetch(`${host}/users/likes/${postId}`, {
+    cache: 'no-store',
+    next: { tags: ['like'] },
+    headers: {
+      Authorization: `Bearer ${accessToken()}`,
+    },
+  });
   return (await res.json()) as boolean;
 };

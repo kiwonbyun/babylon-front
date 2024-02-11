@@ -6,7 +6,7 @@ function page() {
   return (
     <main className="w-[90%] mx-auto mt-10 space-y-5">
       <h1 className="font-semibold text-2xl">당신의 통찰을 나눠주세요!</h1>
-      <p className="break-keep leading-8 text-gray900 text-lg">
+      <p className="break-keep leading-8 text-gray900 text-lg md:text-base sm:text-base">
         누구든 자신만의 통찰을 나눌 수 있습니다. 당신의 통찰이 누군가에게 큰
         도움이 될 수 있습니다. 어떤 분야에서든 남에게 도움이 될 만한 지식을 가진
         우리 모두는 좋은 선생님이 될 수 있습니다. 여러분이 만나는 다양한

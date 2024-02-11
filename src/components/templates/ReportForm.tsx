@@ -25,7 +25,10 @@ function ReportForm({
   return (
     <section className="mt-20 flex-col-box gap-10 mb-20">
       <div>{header}</div>
-      <form className="flex flex-col gap-4 w-1/3" action={dispatch}>
+      <form
+        className="flex flex-col gap-4 w-1/2 md:w-[90%] sm:w-[90%]"
+        action={dispatch}
+      >
         <LabeledInput
           className="w-full"
           error={state.errors?.name}
