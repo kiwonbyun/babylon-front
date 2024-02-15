@@ -11,6 +11,7 @@ import Xmark from '@/components/icons/Xmark';
 import { toast } from 'sonner';
 import ImageCircle from '@/components/atoms/ImageCircle';
 import Loading from '@/components/atoms/Loading';
+import { useRouter } from 'next/navigation';
 
 type ClientImageType = string | null | File;
 
@@ -20,6 +21,7 @@ function EditForm({ user }: { user: LoginUser }) {
   );
   const updateUserSAWithId = updateUserSA.bind(null, user.id);
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   const getPreviewImageSrc = (image: ClientImageType) => {
     if (image === null) {
@@ -47,6 +49,7 @@ function EditForm({ user }: { user: LoginUser }) {
       updateUserSAWithId(formdata)
         .then(() => {
           toast.success('프로필이 수정되었습니다.');
+          router.replace('/mypage');
         })
         .catch(() => {
           toast.error('프로필 수정에 실패했습니다.');

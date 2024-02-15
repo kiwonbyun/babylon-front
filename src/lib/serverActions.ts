@@ -222,10 +222,8 @@ export const updateUserSA = async (id: number, data: FormData) => {
     throw new Error(
       error.response?.data.message ?? '서버 오류가 발생했습니다.'
     );
-  } finally {
-    revalidateTag('userinfo');
-    redirect('/mypage');
   }
+  revalidateTag('userinfo');
 };
 
 export const prepareBidSA = async ({
