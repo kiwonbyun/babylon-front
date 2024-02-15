@@ -3,18 +3,11 @@ import { EnumTheme } from '@/types/commonInterface';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
+import Rocket from '@components/icons/Rocket';
 
 const Logo = ({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) => {
   return (
-    <Link className="flex relative w-fit" href="/">
-      <span
-        className={clsx(
-          'text-3xl absolute bottom-3 right-24',
-          fontEmoji.className
-        )}
-      >
-        🚀
-      </span>
+    <Link className="flex w-fit gap-1" href="/">
       <h1
         className={clsx(
           'text-2xl font-extrabold tracking-tight',
@@ -27,6 +20,7 @@ const Logo = ({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) => {
       >
         BABYLON
       </h1>
+      <Rocket />
     </Link>
   );
 };
