@@ -217,14 +217,14 @@ export const updateUserSA = async (id: number, data: FormData) => {
       data,
       accessToken: getAccessToken(),
     });
+    revalidatePath('/mypage');
+    redirect('/mypage');
   } catch (err) {
     const error = err as AxiosError<CustomAxiosError>;
     throw new Error(
       error.response?.data.message ?? '서버 오류가 발생했습니다.'
     );
   }
-  revalidateTag('userinfo');
-  redirect('/mypage');
 };
 
 export const prepareBidSA = async ({
