@@ -223,7 +223,7 @@ export const updateUserSA = async (id: number, data: FormData) => {
       error.response?.data.message ?? '서버 오류가 발생했습니다.'
     );
   }
-  revalidatePath('/mypage');
+  revalidateTag('userinfo');
   redirect('/mypage');
 };
 

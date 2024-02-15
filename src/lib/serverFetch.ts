@@ -59,6 +59,7 @@ export const getUser = async ({ id }: { id?: number }) => {
   if (!id) return null;
   const res = await fetch(`${host}/users/${id}`, {
     cache: 'no-store',
+    next: { tags: ['userinfo'] },
     headers: {
       Authorization: `Bearer ${accessToken()}`,
     },

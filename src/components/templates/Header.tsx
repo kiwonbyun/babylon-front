@@ -12,7 +12,6 @@ import HeaderProfileBtn from '../molecules/HeaderProfileBtn';
 
 async function Header({ theme = EnumTheme.WHITE }: { theme?: EnumTheme }) {
   const token = await loginCheck();
-
   const user = await getUser({ id: token?.sub });
 
   const darkTheme = theme === EnumTheme.BLACK;
