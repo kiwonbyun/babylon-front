@@ -58,10 +58,16 @@ async function BidPage({ params }: { params: { id: string } }) {
         </LabeledBox>
         <LabeledBox label="주문자" className="my-6">
           <div className="flex flex-col gap-1">
-            <LabeledInput label="이름" horizontal name="name" />
+            <LabeledInput
+              label="이름"
+              horizontal
+              name="name"
+              className="w-72 sm:w-full"
+            />
             <LabeledInput
               label="이메일"
               horizontal
+              className="w-72 sm:w-full"
               value={user.email}
               disabled
             />
@@ -70,24 +76,25 @@ async function BidPage({ params }: { params: { id: string } }) {
               horizontal
               name="phone"
               placeholder="연락 가능한 휴대폰번호를 입력해주세요"
-              className="w-72"
+              className="w-72 sm:w-full"
               type="number"
             />
-            <div className="flex gap-1 lg:gap-4 md:flex-col sm:flex-col">
-              <LabeledInput
-                label="입찰금액"
-                horizontal
-                type="number"
-                name="bidPrice"
-              />
-              <LabeledInput
-                label="현재 입찰금액"
-                horizontal
-                className="w-28"
-                value={moneyFormatter(post.bidPrice)}
-                disabled
-              />
-            </div>
+            <LabeledInput
+              label={'현재 ~ 최대 입찰금액'}
+              horizontal
+              className="w-72 sm:w-full"
+              value={`${moneyFormatter(post.bidPrice)} ~ ${moneyFormatter(
+                post.maxPrice
+              )}`}
+              disabled
+            />
+            <LabeledInput
+              label="나의 입찰금액"
+              horizontal
+              className="w-72 sm:w-full"
+              type="number"
+              name="bidPrice"
+            />
           </div>
         </LabeledBox>
         <LabeledBox label="결제수단" className="my-6">

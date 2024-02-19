@@ -1,7 +1,8 @@
-import PlayBtnImage from '@/components/molecules/PlayBtnImage';
+import HoverItemImage from '@/components/molecules/HoverItemImage';
 import { Post } from '@/types/postsInterface';
 import Link from 'next/link';
 import React from 'react';
+import HoverInfo from '../Post/HoverInfo';
 
 function GridPosts({ items }: { items: Post[] }) {
   return (
@@ -9,7 +10,7 @@ function GridPosts({ items }: { items: Post[] }) {
       {items.map((post) => (
         <li key={post.id} className="w-full">
           <Link href={`posts/${post.id}`}>
-            <PlayBtnImage
+            <HoverItemImage
               alt={`posts-thumbnail-${post.id}`}
               src={post.thumbnails[0]}
               fill
@@ -17,6 +18,7 @@ function GridPosts({ items }: { items: Post[] }) {
               placeholder="blur"
               blurDataURL={post.base64}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              render={<HoverInfo post={post} />}
             />
 
             <div>

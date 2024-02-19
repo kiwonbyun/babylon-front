@@ -10,5 +10,5 @@ export const getDday = (date: string) => {
 };
 
 export const getFormattedDate = (date: string) => {
-  return dayjs(date).format('YY.MM.DD HH시mm분');
+  return dayjs(date).format('YY.MM.DD(dd) HH시mm분');
 };

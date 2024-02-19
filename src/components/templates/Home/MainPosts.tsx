@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayBtnImage from '@components/molecules/PlayBtnImage';
+import HoverItemImage from '@/components/molecules/HoverItemImage';
 import BidPrice from '../../molecules/BidPrice';
 import { moneyFormatter } from '@/utils/formatter';
 import GridPosts from './GridPosts';
@@ -7,6 +7,8 @@ import { getPosts } from '@/lib/serverFetch';
 import Link from 'next/link';
 import { fontPoppinsEN } from '@/lib/fonts';
 import clsx from 'clsx';
+import { getFormattedDate } from '@/utils/day';
+import HoverInfo from '../Post/HoverInfo';
 
 export default async function MainPosts() {
   const posts = await getPosts();
@@ -19,15 +21,17 @@ export default async function MainPosts() {
 
   return (
     <div className="w-[90%] mx-auto my-12">
-      <h1 className={clsx('font-semibold text-lg', fontPoppinsEN.className)}>
+      <h1
+        className={clsx('font-semibold text-lg mb-2', fontPoppinsEN.className)}
+      >
         Meetings
       </h1>
       <Link
-        className="grid grid-cols-2 gap-4 sm:gap-1 mb-12 sm:grid-cols-1"
+        className="grid grid-cols-2 gap-4 sm:gap-1 mb-12 sm:mb-6 sm:grid-cols-1"
         href={`posts/${firstPost.id}`}
       >
         <article className="flex flex-col justify-center items-start gap-5 sm:gap-1">
-          <h1 className="text-3xl sm:text-xl font-bold line-clamp-1 hover:text-gray600">
+          <h1 className="text-3xl sm:text-xl font-bold line-clamp-1 sm:line-clamp-3 hover:text-gray600">
             {firstPost.title}
           </h1>
           <span className="text-sm font-light text-gray900">
@@ -54,7 +58,7 @@ export default async function MainPosts() {
             />
           </div>
         </article>
-        <PlayBtnImage
+        <HoverItemImage
           alt="first-thumbnail"
           src={firstPost.thumbnails[0]}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -63,6 +67,7 @@ export default async function MainPosts() {
           priority
           placeholder="blur"
           blurDataURL={firstPost.base64}
+          render={<HoverInfo post={firstPost} />}
         />
       </Link>
       <GridPosts items={restPosts} />

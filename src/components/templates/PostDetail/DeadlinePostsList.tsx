@@ -1,4 +1,4 @@
-import PlayBtnImage from '@/components/molecules/PlayBtnImage';
+import HoverItemImage from '@/components/molecules/HoverItemImage';
 import { fontPoppinsEN } from '@/lib/fonts';
 import { Post } from '@/types/postsInterface';
 import { getDday } from '@/utils/day';
@@ -13,7 +13,7 @@ function DeadlinePostsList({ items }: { items: Post[] }) {
           <Link key={post.id} href={`/posts/${post.id}`}>
             <li className="flex gap-2">
               <section className="w-1/2 aspect-video">
-                <PlayBtnImage
+                <HoverItemImage
                   alt={`${post.id}-thumbnail`}
                   src={post.thumbnails[0]}
                   fill
