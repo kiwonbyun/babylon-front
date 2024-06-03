@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <main>
-        home test
       <PartDivider>
         <Suspense fallback={<MainPostsSkeleton />}>
           <MainPosts />

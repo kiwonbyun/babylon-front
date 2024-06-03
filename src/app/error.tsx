@@ -31,7 +31,7 @@ export default function Error({
 
       <article className="flex-col-box mt-40 gap-10">
         <h2 className="text-2xl font-semibold break-keep gap-2 flex-box sm:flex-col-box">
-          <span>앗! 문제가 발생했습니다.</span>
+          <span>앗! 문제가 발생했습니다!</span>
           <span>고객센터에 문의해 주세요.</span>
           <span className={fontEmoji.className}>😥</span>
         </h2>
