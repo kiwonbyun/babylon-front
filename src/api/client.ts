@@ -6,7 +6,7 @@ const client = axios.create();
 client.defaults.baseURL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8000'
-    : 'https://babyloninspi.com/api';
+    : 'http://43.203.212.13:8000';
 client.defaults.withCredentials = true;
 
 client.interceptors.request.use((config) => {
