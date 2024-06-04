@@ -19,6 +19,10 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
+    NEXT_PUBLIC_DOMAIN:process.env.NEXT_PUBLIC_DOMAIN
+  }
 };
 
 export default withPlaiceholder(nextConfig);
