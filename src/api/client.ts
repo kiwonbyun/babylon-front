@@ -6,7 +6,7 @@ const client = axios.create();
 client.defaults.baseURL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8000'
-    : 'http://43.203.212.13:8000';
+    : process.env.NEXT_PUBLIC_SERVER_URL;
 client.defaults.withCredentials = true;
 
 client.interceptors.request.use((config) => {
