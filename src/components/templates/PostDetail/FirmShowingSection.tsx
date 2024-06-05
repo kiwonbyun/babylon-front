@@ -15,10 +15,12 @@ import LikeHeartButton from '@/components/molecules/LikeHeartButton';
 import { SkeletonLine } from '@/components/molecules/skeletons';
 
 async function FirmShowingSection({ id }: { id: string }) {
+    console.time('FirmShowingSection');
   const [post, isLiked] = await Promise.all([
     getPostDetail(id),
     getIsLiked(id),
   ]);
+  console.timeEnd('FirmShowingSection');
   const firmLinkId = post.firmLink
     ? new URL(post.firmLink).pathname.replaceAll('/', '')
     : null;
