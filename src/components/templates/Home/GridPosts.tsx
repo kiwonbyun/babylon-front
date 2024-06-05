@@ -16,7 +16,7 @@ function GridPosts({ items }: { items: Post[] }) {
               fill
               style={{ objectFit: 'cover', objectPosition: 'center' }}
               placeholder="blur"
-              blurDataURL={post.base64}
+              // blurDataURL={post.base64}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               render={<HoverInfo post={post} />}
             />

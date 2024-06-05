@@ -21,23 +21,23 @@ export const getPosts = async (query?: string) => {
     notFound();
   }
 
-  const base64_data = await Promise.all(
-    data.map(async (item) => {
-      const buffer = await fetch(item.thumbnails[0]).then(async (res) => {
-        return Buffer.from(await res.arrayBuffer());
-      });
-      const { base64 } = await getPlaiceholder(buffer);
-      return { ...item, base64 };
-    })
-  );
+  // const base64_data = await Promise.all(
+  //   data.map(async (item) => {
+  //     const buffer = await fetch(item.thumbnails[0]).then(async (res) => {
+  //       return Buffer.from(await res.arrayBuffer());
+  //     });
+  //     const { base64 } = await getPlaiceholder(buffer);
+  //     return { ...item, base64 };
+  //   })
+  // );
 
-  return base64_data;
+  return data;
 };
 
 export const getPostDetail = async (id: string) => {
   console.time('getPostDetail');
   const res = await fetch(`${host}/posts/${id}`, {
-    cache: 'no-store',
+    next:{revalidate:300}
   });
   const data: Post & { error: string } = await res.json();
 
@@ -45,11 +45,11 @@ export const getPostDetail = async (id: string) => {
     notFound();
   }
 
-  const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
-    return Buffer.from(await res.arrayBuffer());
-  });
-  const { base64 } = await getPlaiceholder(buffer);
-  data.base64 = base64;
+  // const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
+  //   return Buffer.from(await res.arrayBuffer());
+  // });
+  // const { base64 } = await getPlaiceholder(buffer);
+  // data.base64 = base64;
 
   console.timeEnd('getPostDetail');
   return data;

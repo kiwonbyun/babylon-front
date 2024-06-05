@@ -41,7 +41,7 @@ async function BidPage({ params }: { params: { id: string } }) {
                 }}
                 priority
                 placeholder="blur"
-                blurDataURL={post.base64}
+                // blurDataURL={post.base64}
               />
             </div>
             <div className="flex flex-col gap-2">
