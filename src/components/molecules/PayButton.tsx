@@ -56,7 +56,6 @@ function PayButton({
     });
 
     const { IMP } = window;
-    console.log(storeCode);
     IMP.init(storeCode); // 가맹점 식별코드
 
     const data: RequestPay = {
