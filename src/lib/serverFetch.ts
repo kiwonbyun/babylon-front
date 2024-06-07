@@ -34,7 +34,7 @@ export const getPosts = async (query?: string) => {
   return data;
 };
 
-export const getNoBlurPostDetail = async (id: string) => {
+export const getPostDetail = async (id: string, {blur}={blur:false}) => {
   const res = await fetch(`${host}/posts/${id}`, {
     next:{revalidate:300}
   });
@@ -44,24 +44,14 @@ export const getNoBlurPostDetail = async (id: string) => {
     notFound();
   }
 
-  return data;
-};
-
-export const getPostDetail = async (id: string) => {
-  const res = await fetch(`${host}/posts/${id}`, {
-    next:{revalidate:300}
-  });
-  const data: Post & { error: string } = await res.json();
-
-  if (data?.error) {
-    notFound();
+  if(blur){
+    const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
+      return Buffer.from(await res.arrayBuffer());
+    });
+    const { base64 } = await getPlaiceholder(buffer);
+    data.base64 = base64;
   }
 
-  const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
-    return Buffer.from(await res.arrayBuffer());
-  });
-  const { base64 } = await getPlaiceholder(buffer);
-  data.base64 = base64;
 
   return data;
 };

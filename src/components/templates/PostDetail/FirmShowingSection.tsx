@@ -3,24 +3,20 @@ import { getIsLiked, getPostDetail } from '@/lib/serverFetch';
 import Button from '@/components/atoms/Button/Button';
 import Divider from '@/components/atoms/Divider';
 import YoutubePlayer from '@/components/atoms/YoutubePlayer';
-import Heart from '@/components/icons/Heart';
 import BidPrice from '@/components/molecules/BidPrice';
 import { moneyFormatter } from '@/utils/formatter';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Suspense } from 'react';
+import React from 'react';
 import LikeHeartButton from '@/components/molecules/LikeHeartButton';
-import { SkeletonLine } from '@/components/molecules/skeletons';
 
 async function FirmShowingSection({ id }: { id: string }) {
-    console.time('FirmShowingSection');
   const [post, isLiked] = await Promise.all([
     getPostDetail(id),
     getIsLiked(id),
   ]);
-  console.timeEnd('FirmShowingSection');
   const firmLinkId = post.firmLink
     ? new URL(post.firmLink).pathname.replaceAll('/', '')
     : null;
