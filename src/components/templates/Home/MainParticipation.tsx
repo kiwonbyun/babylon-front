@@ -2,6 +2,7 @@ import Button from '@/components/atoms/Button/Button';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+// @ts-ignore
 import participationImage from "../../../../public/participation.webp"
 
 function MainParticipation() {

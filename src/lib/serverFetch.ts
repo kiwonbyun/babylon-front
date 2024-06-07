@@ -21,17 +21,17 @@ export const getPosts = async (query?: string) => {
     notFound();
   }
 
-  // const base64_data = await Promise.all(
-  //   data.map(async (item) => {
-  //     const buffer = await fetch(item.thumbnails[0]).then(async (res) => {
-  //       return Buffer.from(await res.arrayBuffer());
-  //     });
-  //     const { base64 } = await getPlaiceholder(buffer);
-  //     return { ...item, base64 };
-  //   })
-  // );
+  const base64_data = await Promise.all(
+    data.map(async (item) => {
+      const buffer = await fetch(item.thumbnails[0]).then(async (res) => {
+        return Buffer.from(await res.arrayBuffer());
+      });
+      const { base64 } = await getPlaiceholder(buffer);
+      return { ...item, base64 };
+    })
+  );
 
-  return data;
+  return base64_data;
 };
 
 export const getPostDetail = async (id: string, {blur}={blur:false}) => {

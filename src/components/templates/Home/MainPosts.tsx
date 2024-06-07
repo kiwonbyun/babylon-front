@@ -65,8 +65,8 @@ export default async function MainPosts() {
           fill
           style={{ objectFit: 'cover', objectPosition: 'center' }}
           priority
-          // placeholder="blur"
-          // blurDataURL={firstPost.base64}
+          placeholder="blur"
+          blurDataURL={firstPost.base64}
           render={<HoverInfo post={firstPost} />}
         />
       </Link>
