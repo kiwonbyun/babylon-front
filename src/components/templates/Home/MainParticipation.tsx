@@ -2,6 +2,7 @@ import Button from '@/components/atoms/Button/Button';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import participationImage from "../../../../public/participation.webp"
 
 function MainParticipation() {
   return (
@@ -32,7 +33,7 @@ function MainParticipation() {
       >
         <Image
           alt="participant-banner"
-          src="/participation.webp"
+          src={participationImage}
           fill
           placeholder="blur"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
