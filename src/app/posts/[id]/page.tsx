@@ -1,7 +1,7 @@
 import DeadlinePostsSection from '@/components/templates/PostDetail/DeadlinePostsSection';
 import FirmShowingSection from '@/components/templates/PostDetail/FirmShowingSection';
 import { Metadata } from 'next';
-import React, {Suspense} from 'react';
+import React from 'react';
 import {getPostDetail} from "@/lib/serverFetch";
 
 export const generateMetadata = async ({
@@ -18,9 +18,7 @@ export const generateMetadata = async ({
 async function page({ params }: { params: { id: string } }) {
   return (
     <main className="w-[90%] m-auto mt-4 flex gap-4 md:flex-col sm:flex-col sm:gap-10 md:gap-10">
-        <Suspense fallback={<div>loading...</div>}>
-            <FirmShowingSection id={params.id} />
-        </Suspense>
+        <FirmShowingSection id={params.id} />
       <DeadlinePostsSection id={params.id} />
     </main>
   );

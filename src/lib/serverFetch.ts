@@ -12,8 +12,8 @@ const host =
 
 export const getPosts = async (query?: string) => {
   const res = await fetch(`${host}/posts${query ?? ''}`, {
-    // next: { revalidate: 60 * 10 },
-    cache: 'no-store',
+    next: { revalidate: 300 },
+    // cache: 'no-store',
   });
   const data: Post[] & { error: string } = await res.json();
 
@@ -48,7 +48,7 @@ export const getPostDetail = async (id: string, {blur}={blur:false}) => {
     const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
       return Buffer.from(await res.arrayBuffer());
     });
-    const { base64 } = await getPlaiceholder(buffer);
+    const { base64 } = await getPlaiceholder(buffer,{size:10});
     data.base64 = base64;
   }
 
@@ -96,7 +96,6 @@ export const getMyLikes = async () => {
 };
 
 export const getIsLiked = async (postId: string) => {
-  console.time('getIsLiked')
   const res = await fetch(`${host}/users/likes/${postId}`, {
     cache: 'no-store',
     next: { tags: ['like'] },
@@ -104,6 +103,5 @@ export const getIsLiked = async (postId: string) => {
       Authorization: `Bearer ${accessToken()}`,
     },
   });
-  console.timeEnd('getIsLiked')
   return (await res.json()) as boolean;
 };
