@@ -10,10 +10,11 @@ const host =
     ? 'http://localhost:8000'
     : process.env.NEXT_PUBLIC_SERVER_URL;
 
+const blurImageCache = new Map<string, string>()
+
 export const getPosts = async (query?: string) => {
   const res = await fetch(`${host}/posts${query ?? ''}`, {
     next: { revalidate: 300 },
-    // cache: 'no-store',
   });
   const data: Post[] & { error: string } = await res.json();
 
@@ -23,10 +24,15 @@ export const getPosts = async (query?: string) => {
 
   const base64_data = await Promise.all(
     data.map(async (item) => {
+      const cacheKey = item.thumbnails[0]
+      if(blurImageCache.has(cacheKey)){
+        return {...item, base64: blurImageCache.get(cacheKey)}
+      }
       const buffer = await fetch(item.thumbnails[0]).then(async (res) => {
         return Buffer.from(await res.arrayBuffer());
       });
       const { base64 } = await getPlaiceholder(buffer,{size:10});
+      blurImageCache.set(cacheKey, base64);
       return { ...item, base64 };
     })
   );
