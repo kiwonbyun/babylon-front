@@ -26,7 +26,7 @@ export const getPosts = async (query?: string) => {
       const buffer = await fetch(item.thumbnails[0]).then(async (res) => {
         return Buffer.from(await res.arrayBuffer());
       });
-      const { base64 } = await getPlaiceholder(buffer);
+      const { base64 } = await getPlaiceholder(buffer,{size:10});
       return { ...item, base64 };
     })
   );
