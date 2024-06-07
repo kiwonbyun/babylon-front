@@ -34,6 +34,7 @@ function MainParticipation() {
           alt="participant-banner"
           src="/participation.webp"
           fill
+          placeholder="blur"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
           style={{ objectFit: 'cover', objectPosition: 'top' }}
         />
