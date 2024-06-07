@@ -45,11 +45,11 @@ export const getPostDetail = async (id: string) => {
     notFound();
   }
 
-  // const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
-  //   return Buffer.from(await res.arrayBuffer());
-  // });
-  // const { base64 } = await getPlaiceholder(buffer);
-  // data.base64 = base64;
+  const buffer = await fetch(data.thumbnails[0]).then(async (res) => {
+    return Buffer.from(await res.arrayBuffer());
+  });
+  const { base64 } = await getPlaiceholder(buffer);
+  data.base64 = base64;
 
   console.timeEnd('getPostDetail');
   return data;
